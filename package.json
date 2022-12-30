@@ -1,0 +1,31 @@
+{
+  "name": "vite-template-solid",
+  "version": "0.0.0",
+  "description": "",
+  "scripts": {
+    "start": "vite",
+    "dev": "vite",
+    "build": "vite build",
+    "serve": "vite preview",
+    "test": "vitest run",
+    "coverage": "vitest --coverage",
+    "prepare": "husky install"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "autoprefixer": "^10.4.13",
+    "husky": "^8.0.2",
+    "jsdom": "^20.0.3",
+    "postcss": "^8.4.20",
+    "solid-testing-library": "^0.5.0",
+    "tailwindcss": "^3.2.4",
+    "typescript": "^4.9.4",
+    "vite": "^4.0.3",
+    "vite-plugin-solid": "^2.5.0",
+    "vitest": "^0.26.2"
+  },
+  "dependencies": {
+    "@solidjs/router": "^0.6.0",
+    "solid-js": "^1.6.6"
+  }
+}
