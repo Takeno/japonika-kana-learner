@@ -1,0 +1,8 @@
+{
+  "extends": ["@improntaadvance", "plugin:solid/typescript"],
+  "plugins": ["solid"],
+  "rules": {
+    "testing-library/prefer-screen-queries": 0,
+    "react/prop-types": 0
+  }
+}

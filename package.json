@@ -8,14 +8,21 @@
     "build": "vite build",
     "serve": "vite preview",
     "test": "vitest run",
+    "lint:fix": "eslint --fix",
+    "lint:ci": "eslint --quiet ./src",
     "coverage": "vitest --coverage",
     "prepare": "husky install"
   },
   "license": "MIT",
   "devDependencies": {
+    "@improntaadvance/eslint-config": "^0.11.0",
     "autoprefixer": "^10.4.13",
+    "eslint": "^8.0.0",
+    "eslint-config-react-app": "7.0.1",
+    "eslint-plugin-solid": "^0.9.1",
     "husky": "^8.0.2",
     "jsdom": "^20.0.3",
+    "lint-staged": "^13.1.0",
     "postcss": "^8.4.20",
     "solid-testing-library": "^0.5.0",
     "tailwindcss": "^3.2.4",
@@ -27,5 +34,8 @@
   "dependencies": {
     "@solidjs/router": "^0.6.0",
     "solid-js": "^1.6.6"
+  },
+  "lint-staged": {
+    "*.{ts,tsx,js,jsx}": "eslint --fix"
   }
 }
