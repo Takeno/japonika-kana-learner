@@ -1,4 +1,5 @@
 import { createSignal } from "solid-js";
+import { AllKana } from "../utils/kana";
 
 export default function useKanaQuiz() {
   const [state, setState] = createSignal<KanaQuizGameState>('start');

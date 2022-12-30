@@ -1,12 +1,9 @@
 import { Component, createSignal, For } from 'solid-js';
+import { AllKana, HIRAGANA_GROUPS } from '../../utils/kana';
+import { ObjectEntries } from '../../utils/utils';
 
 type KanaQuizStartProps = {
   onStart: (kanas:AllKana[]) => void;
-}
-
-const HIRAGANA_GROUPS = {
-  'あ': ['あ', 'い', 'う', 'え', 'お'],
-  'か': ['か', 'き', 'く', 'け', 'き'],
 }
 
 type KanaGroup = keyof typeof HIRAGANA_GROUPS;
@@ -42,7 +39,7 @@ const KanaQuizStart: Component<KanaQuizStartProps> = ({onStart}) => {
       <h1>KanaQuiz</h1>
       <span>Scegli cosa vuoi imparare</span>
 
-      <For each={Object.entries(HIRAGANA_GROUPS)}>
+      <For each={ObjectEntries(HIRAGANA_GROUPS)}>
         {([key, items]) =>
           <div class={selectedKanas().includes(key) ? 'bg-green-400' : ''} onClick={() => toggleSelection(key)}>
             {items.join('')}
