@@ -1,10 +1,9 @@
-import { Component, createEffect, Match, Switch } from 'solid-js';
+import {Component, createEffect, Match, Switch} from 'solid-js';
 import useKanaQuiz from '../hooks/useKanaQuiz';
 import KanaQuizStart from './KanaQuiz/Start';
 
 const KanaQuiz: Component = () => {
   const game = useKanaQuiz();
-
 
   createEffect(() => {
     console.log(game.kanas());
@@ -20,7 +19,7 @@ const KanaQuiz: Component = () => {
         </Match>
       </Switch>
     </>
-  )
-}
+  );
+};
 
 export default KanaQuiz;

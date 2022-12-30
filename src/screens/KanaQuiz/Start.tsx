@@ -1,38 +1,37 @@
-import { Component, createSignal, For } from 'solid-js';
-import { AllKana, HIRAGANA_GROUPS } from '../../utils/kana';
-import { ObjectEntries } from '../../utils/utils';
+import {Component, createSignal, For} from 'solid-js';
+import {AllKana, HIRAGANA_GROUPS} from '../../utils/kana';
+import {ObjectEntries} from '../../utils/utils';
 
 type KanaQuizStartProps = {
-  onStart: (kanas:AllKana[]) => void;
-}
+  onStart: (kanas: AllKana[]) => void;
+};
 
 type KanaGroup = keyof typeof HIRAGANA_GROUPS;
 
-const KanaQuizStart: Component<KanaQuizStartProps> = ({onStart}) => {
+const KanaQuizStart: Component<KanaQuizStartProps> = (props) => {
   const [selectedKanas, setSelectedKanas] = createSignal<Array<KanaGroup>>([]);
 
   function toggleSelection(group: KanaGroup) {
-    if(selectedKanas().includes(group)) {
-      setSelectedKanas(old => old.filter(k => k !== group));
+    if (selectedKanas().includes(group)) {
+      setSelectedKanas((old) => old.filter((k) => k !== group));
     } else {
-      setSelectedKanas(old => old.concat(group));
+      setSelectedKanas((old) => old.concat(group));
     }
   }
 
   function handleSubmit() {
     const selected = selectedKanas();
-    if(selected.length === 0) {
+    if (selected.length === 0) {
       return;
     }
 
-    let kanas:AllKana[] = [];
-    for(let group of selected) {
+    let kanas: AllKana[] = [];
+    for (let group of selected) {
       kanas = kanas.concat(HIRAGANA_GROUPS[group]);
     }
 
-    onStart(kanas);
+    props.onStart(kanas);
   }
-
 
   return (
     <>
@@ -40,16 +39,21 @@ const KanaQuizStart: Component<KanaQuizStartProps> = ({onStart}) => {
       <span>Scegli cosa vuoi imparare</span>
 
       <For each={ObjectEntries(HIRAGANA_GROUPS)}>
-        {([key, items]) =>
-          <div class={selectedKanas().includes(key) ? 'bg-green-400' : ''} onClick={() => toggleSelection(key)}>
+        {([key, items]) => (
+          <div
+            class={selectedKanas().includes(key) ? 'bg-green-400' : ''}
+            onClick={() => toggleSelection(key)}
+          >
             {items.join('')}
           </div>
-        }
+        )}
       </For>
 
-      <button disabled={selectedKanas().length === 0} onClick={handleSubmit}>Start</button>
+      <button disabled={selectedKanas().length === 0} onClick={handleSubmit}>
+        Start
+      </button>
     </>
-  )
-}
+  );
+};
 
 export default KanaQuizStart;

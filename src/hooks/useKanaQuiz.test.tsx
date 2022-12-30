@@ -1,5 +1,4 @@
-import { describe, expect, test } from 'vitest'
-import { fireEvent, render } from 'solid-testing-library'
+import {describe, expect, test} from 'vitest';
 import useKanaQuiz from './useKanaQuiz';
 
 describe('useKanaQuiz', () => {
@@ -15,6 +14,6 @@ describe('useKanaQuiz', () => {
     expect(game.state()).toBe('start');
     game.startGame(['あ']);
     expect(game.state()).toBe('phase-1');
-    expect(game.kanas()).toContain('あ')
+    expect(game.kanas()).toContain('あ');
   });
 });

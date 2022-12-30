@@ -1,10 +1,10 @@
-import { vi, describe, expect, test } from 'vitest'
-import { fireEvent, render } from 'solid-testing-library'
-import Start from './Start'
+import {vi, describe, expect, test} from 'vitest';
+import {fireEvent, render} from 'solid-testing-library';
+import Start from './Start';
 
 describe('<Start />', () => {
   test('renders', () => {
-    const { container, unmount, queryByText } = render(() => <Start onStart={() => {}} />)
+    const {unmount, queryByText} = render(() => <Start onStart={() => {}} />);
 
     const title = queryByText('KanaQuiz');
     expect(title).toBeDefined();
@@ -13,11 +13,11 @@ describe('<Start />', () => {
     expect(button).toBeDefined();
     expect((button as HTMLButtonElement).disabled).toBe(true);
 
-    unmount()
+    unmount();
   });
 
   test('selected rows are green', () => {
-    const { container, unmount, queryByText } = render(() => <Start onStart={() => {}} />)
+    const {unmount, queryByText} = render(() => <Start onStart={() => {}} />);
 
     const firstRow = queryByText('あいうえお');
     expect(firstRow).toBeDefined();
@@ -27,14 +27,13 @@ describe('<Start />', () => {
 
     expect(firstRow!.classList.contains('bg-green-400')).toBe(true);
 
-    unmount()
+    unmount();
   });
-
 
   test('selected rows are submitted', () => {
     const onStart = vi.fn();
 
-    const { container, unmount, queryByText } = render(() => <Start onStart={onStart} />)
+    const {unmount, queryByText} = render(() => <Start onStart={onStart} />);
 
     const firstRow = queryByText('あいうえお');
     fireEvent.click(firstRow!);
@@ -47,6 +46,6 @@ describe('<Start />', () => {
 
     expect(onStart).toBeCalledWith(['あ', 'い', 'う', 'え', 'お']);
 
-    unmount()
+    unmount();
   });
 });
