@@ -6,7 +6,7 @@ export default function useKanaQuiz() {
   const [kanas, setKanas] = createSignal<AllKana[]>([]);
 
   const startGame = (kanas: AllKana[]) => {
-    setKanas(kanas);
+    setKanas(kanas.sort(() => 0.5 - Math.random()));
     setState('phase-1');
   };
 
