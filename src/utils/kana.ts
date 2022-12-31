@@ -252,3 +252,8 @@ export const KATAKANA_GROUPS = {
 } as const;
 
 export type AllKana = HiraganaKana | KatakanaKana;
+
+export const ALL_KANA = {
+  ...HIRAGANA,
+  ...KATAKANA,
+} as const;
