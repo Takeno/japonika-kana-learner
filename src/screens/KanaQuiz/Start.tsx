@@ -35,23 +35,43 @@ const KanaQuizStart: Component<KanaQuizStartProps> = (props) => {
 
   return (
     <>
-      <h1>KanaQuiz</h1>
-      <span>Scegli cosa vuoi imparare</span>
+      <h2 class="text-2xl my-6">Scegli cosa vuoi imparare</h2>
 
-      <For each={ObjectEntries(HIRAGANA_GROUPS)}>
-        {([key, items]) => (
-          <div
-            class={selectedKanas().includes(key) ? 'bg-green-400' : ''}
-            onClick={() => toggleSelection(key)}
-          >
-            {items.join('')}
-          </div>
-        )}
-      </For>
+      <div class="grid sm:grid-cols-2 gap-4">
+        <div>
+          <h3>Hiragana</h3>
+          <For each={ObjectEntries(HIRAGANA_GROUPS)}>
+            {([key, items]) => (
+              <label
+                classList={{'bg-green-200': selectedKanas().includes(key)}}
+                class="block cursor-pointer"
+              >
+                <input
+                  type="checkbox"
+                  checked={selectedKanas().includes(key)}
+                  onClick={() => toggleSelection(key)}
+                  class="mx-2"
+                />
+                {items.join('')}
+              </label>
+            )}
+          </For>
+        </div>
 
-      <button disabled={selectedKanas().length === 0} onClick={handleSubmit}>
-        Start
-      </button>
+        <div>
+          <h3>Katakana</h3>
+        </div>
+      </div>
+
+      <div class="text-center">
+        <button
+          class="border-2 px-4 py-2 rounded-xl uppercase"
+          disabled={selectedKanas().length === 0}
+          onClick={handleSubmit}
+        >
+          Start
+        </button>
+      </div>
     </>
   );
 };

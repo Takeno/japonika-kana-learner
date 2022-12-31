@@ -16,7 +16,7 @@ const KanaQuizPhaseOne: Component<KanaQuizPhaseOneProps> = (props) => {
     <div class="container mx-auto">
       <h1>Phase 1</h1>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
         <For each={exercises()}>
           {(item) => (
             <KanaGuesser

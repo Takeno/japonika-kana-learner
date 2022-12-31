@@ -21,11 +21,11 @@ describe('<Start />', () => {
 
     const firstRow = queryByText('あいうえお');
     expect(firstRow).toBeDefined();
-    expect(firstRow!.classList.contains('bg-green-400')).toBe(false);
+    expect(firstRow!.classList.contains('bg-green-200')).toBe(false);
 
     fireEvent.click(firstRow!);
 
-    expect(firstRow!.classList.contains('bg-green-400')).toBe(true);
+    expect(firstRow!.classList.contains('bg-green-200')).toBe(true);
 
     unmount();
   });

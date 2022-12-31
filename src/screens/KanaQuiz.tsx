@@ -11,8 +11,8 @@ const KanaQuiz: Component = () => {
   });
 
   return (
-    <>
-      <span>Game State: {game.state()}</span>
+    <div class="container mx-auto px-4 md:px-0">
+      <h1 class="text-3xl text-center font-bold">KanaQuiz</h1>
 
       <Switch fallback={<p>ERROR</p>}>
         <Match when={game.state() === 'start'}>
@@ -22,7 +22,7 @@ const KanaQuiz: Component = () => {
           <KanaQuizPhaseOne kanas={game.kanas()} />
         </Match>
       </Switch>
-    </>
+    </div>
   );
 };
 
