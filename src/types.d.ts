@@ -4,3 +4,8 @@ type KanaQuizGameState =
   | 'phase-2'
   | 'phase-3'
   | 'summary';
+
+type ExerciseResult = {
+  elapsedTime: number;
+  failedAttempts: number;
+};

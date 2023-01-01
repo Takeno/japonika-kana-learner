@@ -19,7 +19,10 @@ const KanaQuiz: Component = () => {
           <KanaQuizStart onStart={game.startGame} />
         </Match>
         <Match when={game.state() === 'phase-1'}>
-          <KanaQuizPhaseOne kanas={game.kanas()} />
+          <KanaQuizPhaseOne
+            kanas={game.kanas()}
+            onExerciseCompleted={game.handleExerciseCompleted}
+          />
         </Match>
       </Switch>
     </div>

@@ -10,9 +10,15 @@ export default function useKanaQuiz() {
     setState('phase-1');
   };
 
+  const handleExerciseCompleted = (result: ExerciseResult) => {
+    console.log(result);
+    setState('phase-2');
+  };
+
   return {
     state,
     startGame,
     kanas,
+    handleExerciseCompleted,
   };
 }
