@@ -3,7 +3,10 @@ import {AllKana, HIRAGANA_GROUPS} from '../../utils/kana';
 import {ObjectEntries} from '../../utils/utils';
 
 type KanaQuizStartProps = {
-  onStart: (kanas: AllKana[]) => void;
+  onStart: (
+    kanas: AllKana[],
+    config: {exerciseTypes: KanaQuizExerciseType[]}
+  ) => void;
 };
 
 type KanaGroup = keyof typeof HIRAGANA_GROUPS;
@@ -30,7 +33,9 @@ const KanaQuizStart: Component<KanaQuizStartProps> = (props) => {
       kanas = kanas.concat(HIRAGANA_GROUPS[group]);
     }
 
-    props.onStart(kanas);
+    props.onStart(kanas, {
+      exerciseTypes: ['kana2romaji'],
+    });
   }
 
   return (

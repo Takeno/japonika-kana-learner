@@ -3,7 +3,7 @@ import type {AllKana} from '../../utils/kana';
 
 import KanaGuesser from '../../components/KanaGuesser';
 import {calculateKanaExercise} from '../../utils/utils';
-import usePhaseOne from '../../hooks/usePhaseOne';
+import usePhaseOne from '../../stores/usePhaseOne';
 import Timer from '../../components/Timer';
 
 type KanaQuizPhaseOneProps = {

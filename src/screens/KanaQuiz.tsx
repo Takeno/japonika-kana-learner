@@ -1,14 +1,10 @@
-import {Component, createEffect, Match, Switch} from 'solid-js';
-import useKanaQuiz from '../hooks/useKanaQuiz';
+import {Component, Match, Switch} from 'solid-js';
+import createKanaQuiz from '../stores/createKanaQuiz';
 import KanaQuizPhaseOne from './KanaQuiz/PhaseOne';
 import KanaQuizStart from './KanaQuiz/Start';
 
 const KanaQuiz: Component = () => {
-  const game = useKanaQuiz();
-
-  createEffect(() => {
-    console.log(game.kanas());
-  });
+  const game = createKanaQuiz();
 
   return (
     <div class="container mx-auto px-4 md:px-0">
@@ -18,11 +14,24 @@ const KanaQuiz: Component = () => {
         <Match when={game.state() === 'start'}>
           <KanaQuizStart onStart={game.startGame} />
         </Match>
-        <Match when={game.state() === 'phase-1'}>
+        <Match
+          when={
+            game.state() === 'exercise' &&
+            game.currentExerciseType() === 'kana2romaji'
+          }
+        >
           <KanaQuizPhaseOne
             kanas={game.kanas()}
             onExerciseCompleted={game.handleExerciseCompleted}
           />
+        </Match>
+        <Match
+          when={
+            game.state() === 'exercise' &&
+            game.currentExerciseType() === 'kana2romaji'
+          }
+        >
+          <h1>Kana 2</h1>
         </Match>
       </Switch>
     </div>

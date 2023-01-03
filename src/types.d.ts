@@ -1,9 +1,4 @@
-type KanaQuizGameState =
-  | 'start'
-  | 'phase-1'
-  | 'phase-2'
-  | 'phase-3'
-  | 'summary';
+type KanaQuizExerciseType = 'kana2romaji' | 'romaji2kana' | 'kana-free-text';
 
 type ExerciseResult = {
   elapsedTime: number;
