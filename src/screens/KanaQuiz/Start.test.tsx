@@ -45,7 +45,7 @@ describe('<Start />', () => {
     fireEvent.click(button!);
 
     expect(onStart).toBeCalledWith(['あ', 'い', 'う', 'え', 'お'], {
-      exerciseTypes: ['kana2romaji'],
+      exerciseTypes: ['kana2romaji', 'romaji2kana'],
     });
 
     unmount();

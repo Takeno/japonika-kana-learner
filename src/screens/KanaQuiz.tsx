@@ -1,6 +1,7 @@
 import {Component, Match, Switch} from 'solid-js';
 import createKanaQuiz from '../stores/createKanaQuiz';
 import KanaQuizPhaseOne from './KanaQuiz/PhaseOne';
+import RomajiToKana from './KanaQuiz/RomajiToKana';
 import KanaQuizStart from './KanaQuiz/Start';
 
 const KanaQuiz: Component = () => {
@@ -28,10 +29,17 @@ const KanaQuiz: Component = () => {
         <Match
           when={
             game.state() === 'exercise' &&
-            game.currentExerciseType() === 'kana2romaji'
+            game.currentExerciseType() === 'romaji2kana'
           }
         >
-          <h1>Kana 2</h1>
+          <RomajiToKana
+            kanas={game.kanas()}
+            onExerciseCompleted={game.handleExerciseCompleted}
+          />
+        </Match>
+
+        <Match when={game.state() === 'summary'}>
+          <h1>Summary</h1>
         </Match>
       </Switch>
     </div>
