@@ -40,17 +40,15 @@ const KanaToRomaji: Component<KanaToRomajiProps> = (props) => {
 
   return (
     <div class="container mx-auto">
-      <h1>Phase 1</h1>
+      <div class="sm:flex flex-row justify-between items-baseline">
+        <h1 class="text-3xl">Kana to Romaji</h1>
 
-      <span>
-        Attempts: {game().results.reduce((acc, r) => acc + r.attempts, 0)}
-      </span>
-      <br />
-      <span>
-        Timer: <Timer startDate={game().startDate} />
-      </span>
+        <span>
+          Timer: <Timer startDate={game().startDate} />
+        </span>
+      </div>
 
-      <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 my-6">
         <For each={exercises()}>
           {(item, index) => (
             <KanaGuesser
@@ -67,9 +65,15 @@ const KanaToRomaji: Component<KanaToRomajiProps> = (props) => {
         </For>
       </div>
 
-      <button disabled={!game().allCompleted()} onClick={handleFinish}>
-        Finish
-      </button>
+      <div class="text-center">
+        <button
+          class="border-2 px-4 py-2 rounded-xl uppercase"
+          disabled={!game().allCompleted()}
+          onClick={handleFinish}
+        >
+          Next
+        </button>
+      </div>
     </div>
   );
 };

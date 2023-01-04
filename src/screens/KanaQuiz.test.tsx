@@ -6,7 +6,7 @@ describe('<KanaQuiz />', () => {
   test('renders', () => {
     const {unmount, queryByText} = render(() => <KanaQuiz />);
 
-    const title = queryByText('KanaQuiz');
+    const title = queryByText('Kana Quiz');
     expect(title).not.toBeNull();
     unmount();
   });
@@ -20,21 +20,21 @@ describe('<KanaQuiz />', () => {
 
     fireEvent.click(getByText('Start'));
 
-    expect(getByText('Phase 1')).toBeDefined();
+    expect(getByText('Kana to Romaji')).toBeDefined();
 
     const buttons = queryAllByRole('button');
 
     buttons.forEach((button) => {
-      if (button.textContent === 'Finish') {
+      if (button.textContent === 'Next') {
         return;
       }
 
       fireEvent.click(button);
     });
 
-    fireEvent.click(getByText('Finish'));
+    fireEvent.click(getByText('Next'));
 
-    expect(getByText('Phase 2')).toBeDefined();
+    expect(getByText('Romaji to Kana')).toBeDefined();
 
     unmount();
   });

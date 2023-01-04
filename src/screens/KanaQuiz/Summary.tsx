@@ -17,7 +17,7 @@ const Summary: Component<SummaryProps> = (props) => {
 
   return (
     <div class="max-w-xl mx-auto">
-      <h2 class="text-2xl">Summary</h2>
+      <h2 class="text-3xl">Summary</h2>
 
       <dl class="grid grid-cols-2">
         <dt class="font-medium">Total Elapsed Time:</dt>
