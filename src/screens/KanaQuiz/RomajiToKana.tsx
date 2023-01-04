@@ -45,7 +45,7 @@ const RomajiToKana: Component<RomajiToKanaProps> = (props) => {
         Timer: <Timer startDate={game().startDate} />
       </span>
 
-      <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 my-6">
         <For each={exercises()}>
           {(item, index) => (
             <KanaGuesser
@@ -62,9 +62,15 @@ const RomajiToKana: Component<RomajiToKanaProps> = (props) => {
         </For>
       </div>
 
-      <button disabled={!game().allCompleted()} onClick={handleFinish}>
-        Finish
-      </button>
+      <div class="text-center">
+        <button
+          class="border-2 px-4 py-2 rounded-xl uppercase"
+          disabled={!game().allCompleted()}
+          onClick={handleFinish}
+        >
+          Finish
+        </button>
+      </div>
     </div>
   );
 };

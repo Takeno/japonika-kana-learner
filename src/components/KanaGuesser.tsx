@@ -23,7 +23,9 @@ const KanaGuesser: Component<KanaGuesserProps> = (props) => {
 
   return (
     <div class="flex flex-row border-2 border-black rounded-md items-center">
-      <div class="text-3xl border-r-2 border-black p-2">{props.mainChar}</div>
+      <div class="text-3xl border-r-2 border-black p-2 w-14 text-center">
+        {props.mainChar}
+      </div>
 
       <div class="pl-2 flex-1 flex flex-row justify-around">
         <For each={props.answers}>
@@ -71,7 +73,7 @@ const Button: Component<ButtonProps> = (props) => {
 
   return (
     <button
-      class="border-2 aspect-square h-8 rounded-md"
+      class="border-2 aspect-square h-12 rounded-md text-2xl"
       classList={{
         'bg-red-300': error(),
         'bg-green-300': props.state === 'success',
