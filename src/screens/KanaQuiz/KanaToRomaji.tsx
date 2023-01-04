@@ -6,12 +6,12 @@ import {calculateKanaExercise} from '../../utils/utils';
 import usePhaseOne from '../../stores/usePhaseOne';
 import Timer from '../../components/Timer';
 
-type KanaQuizPhaseOneProps = {
+type KanaToRomajiProps = {
   kanas: AllKana[];
   onExerciseCompleted: (result: ExerciseResult) => void;
 };
 
-const KanaQuizPhaseOne: Component<KanaQuizPhaseOneProps> = (props) => {
+const KanaToRomaji: Component<KanaToRomajiProps> = (props) => {
   const game = createMemo(() => usePhaseOne(props.kanas.length));
 
   const exercises = () =>
@@ -27,6 +27,11 @@ const KanaQuizPhaseOne: Component<KanaQuizPhaseOneProps> = (props) => {
       failedAttempts: game().results.reduce(
         (acc, r) => acc + r.attempts - 1,
         0
+      ),
+      successStrikePercentage: Math.round(
+        100 *
+          (game().results.filter((r) => r.attempts === 1).length /
+            game().results.length)
       ),
     };
 
@@ -69,4 +74,4 @@ const KanaQuizPhaseOne: Component<KanaQuizPhaseOneProps> = (props) => {
   );
 };
 
-export default KanaQuizPhaseOne;
+export default KanaToRomaji;

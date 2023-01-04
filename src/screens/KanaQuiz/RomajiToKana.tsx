@@ -1,4 +1,4 @@
-import {Component, createEffect, createMemo, For} from 'solid-js';
+import {Component, createMemo, For} from 'solid-js';
 import type {AllKana} from '../../utils/kana';
 
 import KanaGuesser from '../../components/KanaGuesser';
@@ -27,6 +27,11 @@ const RomajiToKana: Component<RomajiToKanaProps> = (props) => {
       failedAttempts: game().results.reduce(
         (acc, r) => acc + r.attempts - 1,
         0
+      ),
+      successStrikePercentage: Math.round(
+        100 *
+          (game().results.filter((r) => r.attempts === 1).length /
+            game().results.length)
       ),
     };
 

@@ -1,4 +1,5 @@
 import {Component, createSignal, onCleanup} from 'solid-js';
+import {formatTime} from '../utils/utils';
 
 type TimerProps = {
   startDate: Date;
@@ -19,12 +20,3 @@ const Timer: Component<TimerProps> = (props) => {
 };
 
 export default Timer;
-
-function formatTime(seconds: number) {
-  const minutes = Math.floor(seconds / 60);
-  const remainingSeconds = seconds % 60;
-
-  return [minutes, remainingSeconds]
-    .map((v) => ('' + v).padStart(2, '0'))
-    .join(':');
-}

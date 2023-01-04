@@ -6,6 +6,15 @@ export function ObjectEntries<T extends object>(t: T): Entries<T>[] {
   return Object.entries(t) as any;
 }
 
+export function formatTime(seconds: number) {
+  const minutes = Math.floor(seconds / 60);
+  const remainingSeconds = seconds % 60;
+
+  return [minutes, remainingSeconds]
+    .map((v) => ('' + v).padStart(2, '0'))
+    .join(':');
+}
+
 function isTupla<T>(arr: T[]): arr is [T, T, T, T] {
   return arr.length === 4;
 }

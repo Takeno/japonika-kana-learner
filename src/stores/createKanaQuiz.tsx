@@ -50,6 +50,7 @@ export default function createKanaQuiz() {
   return {
     state: () => store.state,
     kanas: () => store.kanas,
+    results: () => store.results,
     startGame,
     handleExerciseCompleted,
     currentExerciseType,
