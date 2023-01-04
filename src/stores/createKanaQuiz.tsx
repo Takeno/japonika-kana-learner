@@ -27,7 +27,7 @@ export default function createKanaQuiz() {
   const startGame = (kanas: AllKana[], config: KanaQuizConfig) => {
     setStore({
       state: 'exercise',
-      kanas: kanas,
+      kanas: kanas.sort(() => 0.5 - Math.random()),
       exerciseTypes: config.exerciseTypes,
       currentExercise: 0,
     });
