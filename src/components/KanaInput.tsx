@@ -7,14 +7,12 @@ type KanaInputProps = {
 };
 
 const KanaInput: Component<KanaInputProps> = (props) => {
-  const handleChange: JSX.EventHandlerUnion<HTMLInputElement, KeyboardEvent> = (
-    e
-  ) => {
-    if (e.key !== 'Enter') {
+  const verify = (el: HTMLInputElement) => {
+    const val = el.value.toLowerCase().trim();
+
+    if (val === '') {
       return;
     }
-
-    const el = e.currentTarget;
 
     const isCorrect =
       el.value.toLowerCase().trim() === props.correct.toLowerCase();
@@ -35,6 +33,26 @@ const KanaInput: Component<KanaInputProps> = (props) => {
     }
   };
 
+  const handleChange: JSX.EventHandlerUnion<HTMLInputElement, KeyboardEvent> = (
+    e
+  ) => {
+    if (e.key !== 'Enter') {
+      return;
+    }
+
+    const el = e.currentTarget;
+
+    verify(el);
+  };
+
+  const handleBlur: JSX.EventHandlerUnion<HTMLInputElement, FocusEvent> = (
+    e
+  ) => {
+    const el = e.currentTarget;
+
+    verify(el);
+  };
+
   return (
     <div class="flex flex-row border-2 border-black rounded-md items-center h-14">
       <div class="text-3xl border-r-2 border-black p-2 w-14 text-center">
@@ -43,9 +61,11 @@ const KanaInput: Component<KanaInputProps> = (props) => {
 
       <div class="flex-1 flex flex-row justify-around h-full">
         <input
-          class="text-2xl w-full h-full text-center outline-none"
+          class="text-2xl w-full h-full text-center outline-none lowercase"
           type="text"
           onKeyDown={handleChange}
+          onBlur={handleBlur}
+          autocapitalize="none"
         />
       </div>
     </div>

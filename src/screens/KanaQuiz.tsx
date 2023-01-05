@@ -4,6 +4,7 @@ import {
   createMemo,
   JSX,
   Match,
+  on,
   splitProps,
   Switch,
 } from 'solid-js';
@@ -25,6 +26,14 @@ const EXERCISE_TYPES: {
 
 const KanaQuiz: Component = () => {
   const game = createKanaQuiz();
+
+  createEffect(
+    on(game.currentExerciseType, () => {
+      window.scrollTo({
+        top: 0,
+      });
+    })
+  );
 
   return (
     <>
