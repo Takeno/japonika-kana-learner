@@ -23,7 +23,7 @@ const KanaGuesser: Component<KanaGuesserProps> = (props) => {
 
   return (
     <div class="flex flex-row border-2 border-black rounded-md items-center">
-      <div class="text-3xl border-r-2 border-black p-2 w-14 text-center">
+      <div class="text-3xl border-r-2 border-black p-2 w-18 text-center">
         {props.mainChar}
       </div>
 
