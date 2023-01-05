@@ -1,4 +1,4 @@
-import {Component, createEffect, createMemo, For} from 'solid-js';
+import {Component, createMemo, For} from 'solid-js';
 import type {AllKana} from '../../utils/kana';
 
 import KanaGuesser from '../../components/KanaGuesser';
@@ -6,10 +6,7 @@ import {calculateKanaExercise} from '../../utils/utils';
 import usePhaseOne from '../../stores/usePhaseOne';
 import Timer from '../../components/Timer';
 
-type KanaToRomajiProps = {
-  kanas: AllKana[];
-  onExerciseCompleted: (result: ExerciseResult) => void;
-};
+type KanaToRomajiProps = KanaQuizExerciseProps<AllKana>;
 
 const KanaToRomaji: Component<KanaToRomajiProps> = (props) => {
   const game = createMemo(() => usePhaseOne(props.kanas.length));

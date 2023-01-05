@@ -1,9 +1,27 @@
-import {Component, Match, Switch} from 'solid-js';
+import {
+  Component,
+  createEffect,
+  createMemo,
+  JSX,
+  Match,
+  splitProps,
+  Switch,
+} from 'solid-js';
 import createKanaQuiz from '../stores/createKanaQuiz';
+import {AllKana} from '../utils/kana';
+import KanaFreeText from './KanaQuiz/KanaFreeText';
 import KanaToRomaji from './KanaQuiz/KanaToRomaji';
 import RomajiToKana from './KanaQuiz/RomajiToKana';
 import KanaQuizStart from './KanaQuiz/Start';
 import Summary from './KanaQuiz/Summary';
+
+const EXERCISE_TYPES: {
+  [k in KanaQuizExerciseType]: Component<KanaQuizExerciseProps<AllKana>>;
+} = {
+  kana2romaji: KanaToRomaji,
+  romaji2kana: RomajiToKana,
+  'kana-free-text': KanaFreeText,
+};
 
 const KanaQuiz: Component = () => {
   const game = createKanaQuiz();
@@ -18,29 +36,13 @@ const KanaQuiz: Component = () => {
           <Match when={game.state() === 'start'}>
             <KanaQuizStart onStart={game.startGame} />
           </Match>
-          <Match
-            when={
-              game.state() === 'exercise' &&
-              game.currentExerciseType() === 'kana2romaji'
-            }
-          >
-            <KanaToRomaji
+          <Match when={game.state() === 'exercise'}>
+            <DynamicComponent
+              component={EXERCISE_TYPES[game.currentExerciseType()]}
               kanas={game.kanas()}
               onExerciseCompleted={game.handleExerciseCompleted}
             />
           </Match>
-          <Match
-            when={
-              game.state() === 'exercise' &&
-              game.currentExerciseType() === 'romaji2kana'
-            }
-          >
-            <RomajiToKana
-              kanas={game.kanas()}
-              onExerciseCompleted={game.handleExerciseCompleted}
-            />
-          </Match>
-
           <Match when={game.state() === 'summary'}>
             <Summary results={game.results()} />
           </Match>
@@ -49,5 +51,21 @@ const KanaQuiz: Component = () => {
     </>
   );
 };
+
+type DynamicComponentProps<T> = {
+  component: Component<T>;
+} & T;
+
+function DynamicComponent<T extends {}>(
+  props: DynamicComponentProps<T>
+): JSX.Element {
+  const [local, rest] = splitProps(props, ['component']);
+
+  const ret = createMemo(() => {
+    return <local.component {...(rest as unknown as T)} />;
+  });
+
+  return <>{ret()}</>;
+}
 
 export default KanaQuiz;

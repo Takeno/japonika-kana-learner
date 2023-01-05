@@ -34,7 +34,7 @@ const KanaQuizStart: Component<KanaQuizStartProps> = (props) => {
     }
 
     props.onStart(kanas, {
-      exerciseTypes: ['kana2romaji', 'romaji2kana'],
+      exerciseTypes: ['kana2romaji', 'romaji2kana', 'kana-free-text'],
     });
   }
 

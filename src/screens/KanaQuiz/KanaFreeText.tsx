@@ -1,18 +1,13 @@
 import {Component, createMemo, For} from 'solid-js';
-import type {AllKana} from '../../utils/kana';
-
-import KanaGuesser from '../../components/KanaGuesser';
-import {calculateRomajiExercise} from '../../utils/utils';
-import usePhaseOne from '../../stores/usePhaseOne';
+import KanaInput from '../../components/KanaInput';
 import Timer from '../../components/Timer';
+import usePhaseOne from '../../stores/usePhaseOne';
+import {AllKana, ALL_KANA} from '../../utils/kana';
 
-type RomajiToKanaProps = KanaQuizExerciseProps<AllKana>;
+type KanaFreeTextProps = KanaQuizExerciseProps<AllKana>;
 
-const RomajiToKana: Component<RomajiToKanaProps> = (props) => {
+const KanaFreeText: Component<KanaFreeTextProps> = (props) => {
   const game = createMemo(() => usePhaseOne(props.kanas.length));
-
-  const exercises = () =>
-    props.kanas.map((kana) => calculateRomajiExercise(kana, props.kanas));
 
   function handleFinish() {
     if (!game().allCompleted()) {
@@ -38,7 +33,7 @@ const RomajiToKana: Component<RomajiToKanaProps> = (props) => {
   return (
     <div class="container mx-auto">
       <div class="sm:flex flex-row justify-between items-baseline">
-        <h1 class="text-3xl">Romaji to Kana</h1>
+        <h1 class="text-3xl">Kana Free Text</h1>
 
         <span>
           Timer: <Timer startDate={game().startDate} />
@@ -46,13 +41,12 @@ const RomajiToKana: Component<RomajiToKanaProps> = (props) => {
       </div>
 
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 my-6">
-        <For each={exercises()}>
+        <For each={props.kanas}>
           {(item, index) => (
-            <KanaGuesser
-              mainChar={item.romaji}
-              answers={item.answers}
-              correct={item.correct}
-              onAnswer={(_, correct) =>
+            <KanaInput
+              mainChar={item}
+              correct={ALL_KANA[item]}
+              onAnswer={(correct) =>
                 correct
                   ? game().setExerciseCompleted(index())
                   : game().setExerciseFail(index())
@@ -75,4 +69,4 @@ const RomajiToKana: Component<RomajiToKanaProps> = (props) => {
   );
 };
 
-export default RomajiToKana;
+export default KanaFreeText;

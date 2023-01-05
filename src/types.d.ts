@@ -5,3 +5,8 @@ type ExerciseResult = {
   failedAttempts: number;
   successStrikePercentage: number;
 };
+
+type KanaQuizExerciseProps<T> = {
+  kanas: T[];
+  onExerciseCompleted: (result: ExerciseResult) => void;
+};
