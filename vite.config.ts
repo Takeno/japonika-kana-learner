@@ -1,7 +1,7 @@
 /// <reference types="vitest" />
 /// <reference types="vite/client" />
 
-import { defineConfig } from 'vite';
+import {defineConfig} from 'vite';
 import solidPlugin from 'vite-plugin-solid';
 
 export default defineConfig({
@@ -12,6 +12,7 @@ export default defineConfig({
     },
     threads: false,
     isolate: false,
+    setupFiles: ['./vitest-setup.ts'],
   },
   plugins: [solidPlugin()],
   server: {
