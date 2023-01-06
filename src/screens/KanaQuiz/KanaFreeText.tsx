@@ -1,6 +1,6 @@
 import {Component, createMemo, For, onMount} from 'solid-js';
-import KanaInput from '../../components/KanaInput';
-import Timer from '../../components/Timer';
+import KanaInput from './components/KanaInput';
+import Timer from './components/Timer';
 import usePhaseOne from '../../stores/usePhaseOne';
 import {AllKana, ALL_KANA} from '../../utils/kana';
 

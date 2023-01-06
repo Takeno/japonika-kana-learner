@@ -1,5 +1,5 @@
 import {Component, createSignal, onCleanup} from 'solid-js';
-import {formatTime} from '../utils/utils';
+import {formatTime} from '../../../utils/utils';
 
 type TimerProps = {
   startDate: Date;

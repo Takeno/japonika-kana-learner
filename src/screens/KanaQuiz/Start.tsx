@@ -57,20 +57,21 @@ const KanaQuizStart: Component<KanaQuizStartProps> = (props) => {
 
   return (
     <>
-      <h2 class="text-2xl my-6">Scegli cosa vuoi imparare</h2>
+      <h2 class="text-2xl my-4">Benvenuto!</h2>
+      <p>
+        Seleziona i gruppi di caratteri che vuoi studiare, scegli le tipologie
+        di esercizio disponibili e parti!
+      </p>
 
-      <div class="grid sm:grid-cols-2 gap-8">
+      <div class="grid sm:grid-cols-2 gap-8 my-4 -mx-4">
         <div class="bg-gray-50 p-4">
           <h3 class="text-center text-2xl">Hiragana</h3>
-          <fieldset>
+          <fieldset class="my-2">
             <legend class="block text-center">Suoni puri</legend>
-            <div class="grid sm:grid-cols-2 gap-2">
+            <div class="grid grid-cols-2 gap-2">
               <For each={ObjectEntries(HIRAGANA_GROUPS).slice(0, 10)}>
                 {([key, items]) => (
-                  <label
-                    classList={{'bg-green-200': selectedKanas().includes(key)}}
-                    class="block cursor-pointer"
-                  >
+                  <label class="block cursor-pointer">
                     <input
                       type="checkbox"
                       checked={selectedKanas().includes(key)}
@@ -84,15 +85,12 @@ const KanaQuizStart: Component<KanaQuizStartProps> = (props) => {
             </div>
           </fieldset>
 
-          <fieldset>
+          <fieldset class="my-2">
             <legend class="block text-center">Suoni impuri</legend>
-            <div class="grid sm:grid-cols-2 gap-2">
+            <div class="grid grid-cols-2 gap-2">
               <For each={ObjectEntries(HIRAGANA_GROUPS).slice(10, 15)}>
                 {([key, items]) => (
-                  <label
-                    classList={{'bg-green-200': selectedKanas().includes(key)}}
-                    class="block cursor-pointer"
-                  >
+                  <label class="block cursor-pointer">
                     <input
                       type="checkbox"
                       checked={selectedKanas().includes(key)}
@@ -106,15 +104,12 @@ const KanaQuizStart: Component<KanaQuizStartProps> = (props) => {
             </div>
           </fieldset>
 
-          <fieldset>
+          <fieldset class="my-2">
             <legend class="block text-center">Suoni contratti</legend>
-            <div class="grid sm:grid-cols-2 gap-2">
+            <div class="grid grid-cols-2 gap-2">
               <For each={ObjectEntries(HIRAGANA_GROUPS).slice(15)}>
                 {([key, items]) => (
-                  <label
-                    classList={{'bg-green-200': selectedKanas().includes(key)}}
-                    class="block cursor-pointer"
-                  >
+                  <label class="block cursor-pointer">
                     <input
                       type="checkbox"
                       checked={selectedKanas().includes(key)}
@@ -132,15 +127,12 @@ const KanaQuizStart: Component<KanaQuizStartProps> = (props) => {
         <div class="bg-gray-50 p-4">
           <h3 class="text-center text-2xl">Katakana</h3>
 
-          <fieldset>
+          <fieldset class="my-2">
             <legend class="block text-center">Suoni puri</legend>
-            <div class="grid sm:grid-cols-2 gap-2">
+            <div class="grid grid-cols-2 gap-2">
               <For each={ObjectEntries(KATAKANA_GROUPS).slice(0, 10)}>
                 {([key, items]) => (
-                  <label
-                    classList={{'bg-green-200': selectedKanas().includes(key)}}
-                    class="block cursor-pointer"
-                  >
+                  <label class="block cursor-pointer">
                     <input
                       type="checkbox"
                       checked={selectedKanas().includes(key)}
@@ -154,15 +146,12 @@ const KanaQuizStart: Component<KanaQuizStartProps> = (props) => {
             </div>
           </fieldset>
 
-          <fieldset>
+          <fieldset class="my-2">
             <legend class="block text-center">Suoni impuri</legend>
-            <div class="grid sm:grid-cols-2 gap-2">
+            <div class="grid grid-cols-2 gap-2">
               <For each={ObjectEntries(KATAKANA_GROUPS).slice(10, 15)}>
                 {([key, items]) => (
-                  <label
-                    classList={{'bg-green-200': selectedKanas().includes(key)}}
-                    class="block cursor-pointer"
-                  >
+                  <label class="block cursor-pointer">
                     <input
                       type="checkbox"
                       checked={selectedKanas().includes(key)}
@@ -176,15 +165,12 @@ const KanaQuizStart: Component<KanaQuizStartProps> = (props) => {
             </div>
           </fieldset>
 
-          <fieldset>
+          <fieldset class="my-2">
             <legend class="block text-center">Suoni contratti</legend>
-            <div class="grid sm:grid-cols-2 gap-2">
+            <div class="grid grid-cols-2 gap-2">
               <For each={ObjectEntries(KATAKANA_GROUPS).slice(15)}>
                 {([key, items]) => (
-                  <label
-                    classList={{'bg-green-200': selectedKanas().includes(key)}}
-                    class="block cursor-pointer"
-                  >
+                  <label class="block cursor-pointer">
                     <input
                       type="checkbox"
                       checked={selectedKanas().includes(key)}
@@ -200,7 +186,13 @@ const KanaQuizStart: Component<KanaQuizStartProps> = (props) => {
         </div>
       </div>
 
-      <div class="my-6 grid grid-cols-3 gap-2">
+      <h3 class="text-center text-2xl">Tipi di esercizi</h3>
+
+      <p class="italic mt-2 text-center">
+        Presto una descrizione dettagliata...
+      </p>
+
+      <div class="my-2 grid grid-cols-3 gap-2">
         <label>
           <input
             type="checkbox"

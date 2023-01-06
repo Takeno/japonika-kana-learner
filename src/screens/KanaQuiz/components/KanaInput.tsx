@@ -53,8 +53,8 @@ const KanaInput: Component<KanaInputProps> = (props) => {
   };
 
   return (
-    <div class="flex flex-row border-2 border-black rounded-md items-center h-14">
-      <div class="text-3xl border-r-2 border-black p-2 w-18 text-center">
+    <label class="flex flex-row border-2 border-black rounded-md mx-auto">
+      <div class="h-16 w-16 border-r-2 border-black flex items-center justify-center text-3xl">
         {props.mainChar}
       </div>
 
@@ -67,7 +67,7 @@ const KanaInput: Component<KanaInputProps> = (props) => {
           autocapitalize="none"
         />
       </div>
-    </div>
+    </label>
   );
 };
 

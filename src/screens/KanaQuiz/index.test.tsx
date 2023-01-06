@@ -1,6 +1,6 @@
 import {describe, expect, test} from 'vitest';
 import {fireEvent, render} from 'solid-testing-library';
-import KanaQuiz from './KanaQuiz';
+import KanaQuiz from '.';
 
 describe('<KanaQuiz />', () => {
   test('renders', () => {
@@ -14,7 +14,7 @@ describe('<KanaQuiz />', () => {
   test('should go to exercise after kana selection', () => {
     const {unmount, getByText, queryAllByRole} = render(() => <KanaQuiz />);
 
-    expect(getByText('Scegli cosa vuoi imparare')).toBeDefined();
+    expect(getByText('Benvenuto!')).toBeDefined();
 
     fireEvent.click(getByText('あいうえお'));
 

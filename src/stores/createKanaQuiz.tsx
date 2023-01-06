@@ -34,8 +34,6 @@ export default function createKanaQuiz() {
   };
 
   const handleExerciseCompleted = (result: ExerciseResult) => {
-    console.log(result);
-
     setStore('results', store.currentExercise, result);
 
     if (store.currentExercise === store.exerciseTypes.length - 1) {

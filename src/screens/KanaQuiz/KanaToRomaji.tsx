@@ -1,10 +1,10 @@
 import {Component, createMemo, For} from 'solid-js';
 import type {AllKana} from '../../utils/kana';
 
-import KanaGuesser from '../../components/KanaGuesser';
+import KanaGuesser from './components/KanaGuesser';
 import {calculateKanaExercise} from '../../utils/utils';
 import usePhaseOne from '../../stores/usePhaseOne';
-import Timer from '../../components/Timer';
+import Timer from './components/Timer';
 
 type KanaToRomajiProps = KanaQuizExerciseProps<AllKana>;
 
@@ -36,7 +36,7 @@ const KanaToRomaji: Component<KanaToRomajiProps> = (props) => {
   }
 
   return (
-    <div class="container mx-auto">
+    <div class="w-full">
       <div class="sm:flex flex-row justify-between items-baseline">
         <h1 class="text-3xl">Kana to Romaji</h1>
 

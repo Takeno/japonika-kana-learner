@@ -1,5 +1,5 @@
 import {vi, describe, expect, test} from 'vitest';
-import {fireEvent, render} from 'solid-testing-library';
+import {fireEvent, render, within} from 'solid-testing-library';
 import Start from './Start';
 
 describe('<Start />', () => {
@@ -17,16 +17,16 @@ describe('<Start />', () => {
   });
 
   test('selected rows are green', () => {
-    const {unmount, queryByText} = render(() => <Start onStart={() => {}} />);
+    const {unmount, getByText} = render(() => <Start onStart={() => {}} />);
 
-    const firstRow = queryByText('あいうえお');
-    expect(firstRow).toBeDefined();
-    expect(firstRow!.classList.contains('bg-green-200')).toBe(false);
+    const firstRow = getByText('あいうえお');
+
+    const checkbox = within(firstRow).getByRole<HTMLInputElement>('checkbox');
+    expect(checkbox.checked).toBe(false);
 
     fireEvent.click(firstRow!);
 
-    expect(firstRow!.classList.contains('bg-green-200')).toBe(true);
-
+    expect(checkbox.checked).toBe(true);
     unmount();
   });
 
