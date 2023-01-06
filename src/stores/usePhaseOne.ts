@@ -18,6 +18,10 @@ export default function usePhaseOne(numberOfExercises: number) {
   const allCompleted = () => results.every((r) => r.completed);
 
   const setExerciseCompleted = (index: number) => {
+    if (results[index].completed === true) {
+      return;
+    }
+
     setResults(index, (result) => ({
       completed: true,
       attempts: result.attempts + 1,
@@ -25,6 +29,10 @@ export default function usePhaseOne(numberOfExercises: number) {
   };
 
   const setExerciseFail = (index: number) => {
+    if (results[index].completed === true) {
+      return;
+    }
+
     setResults(index, 'attempts', (v) => v + 1);
   };
 

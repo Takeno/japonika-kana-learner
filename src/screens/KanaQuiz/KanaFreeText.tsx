@@ -37,6 +37,7 @@ const KanaFreeText: Component<KanaFreeTextProps> = (props) => {
   }
 
   function handleAnswer(correct: boolean, index: number) {
+    console.log({correct, index});
     const allInputs = inputsContainer.querySelectorAll('input');
 
     if (correct) {
@@ -60,6 +61,8 @@ const KanaFreeText: Component<KanaFreeTextProps> = (props) => {
           Timer: <Timer startDate={game().startDate} />
         </span>
       </div>
+
+      <p>Premi Invio o Tab per validare la risposta inserita.</p>
 
       <div
         ref={(el) => (inputsContainer = el)}
