@@ -14,8 +14,7 @@ const KanaInput: Component<KanaInputProps> = (props) => {
       return;
     }
 
-    const isCorrect =
-      el.value.toLowerCase().trim() === props.correct.toLowerCase();
+    const isCorrect = val === props.correct.toLowerCase();
 
     props.onAnswer(isCorrect);
 
