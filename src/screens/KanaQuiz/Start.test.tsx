@@ -50,4 +50,23 @@ describe('<Start />', () => {
 
     unmount();
   });
+
+  test('selected exercise types are submitted', () => {
+    const onStart = vi.fn();
+
+    const {unmount, getByText} = render(() => <Start onStart={onStart} />);
+
+    fireEvent.click(getByText('あいうえお'));
+
+    fireEvent.click(getByText('Kana To Romaji'));
+    fireEvent.click(getByText('Romaji To Kana'));
+
+    fireEvent.click(getByText('Start'));
+
+    expect(onStart).toBeCalledWith(['あ', 'い', 'う', 'え', 'お'], {
+      exerciseTypes: ['kana-free-text'],
+    });
+
+    unmount();
+  });
 });

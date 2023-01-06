@@ -1,4 +1,5 @@
 import {Component, createSignal, For} from 'solid-js';
+import {createStore} from 'solid-js/store';
 import {AllKana, HIRAGANA_GROUPS, KATAKANA_GROUPS} from '../../utils/kana';
 import {ObjectEntries} from '../../utils/utils';
 
@@ -15,6 +16,14 @@ type KanaGroup = keyof typeof ALL_GROUPS;
 
 const KanaQuizStart: Component<KanaQuizStartProps> = (props) => {
   const [selectedKanas, setSelectedKanas] = createSignal<Array<KanaGroup>>([]);
+
+  const [exerciseTypes, setExerciseTypes] = createStore<{
+    [k in KanaQuizExerciseType]: boolean;
+  }>({
+    kana2romaji: true,
+    romaji2kana: true,
+    'kana-free-text': true,
+  });
 
   function toggleSelection(group: KanaGroup) {
     if (selectedKanas().includes(group)) {
@@ -36,7 +45,13 @@ const KanaQuizStart: Component<KanaQuizStartProps> = (props) => {
     }
 
     props.onStart(kanas, {
-      exerciseTypes: ['kana2romaji', 'romaji2kana', 'kana-free-text'],
+      exerciseTypes: (
+        [
+          'kana2romaji',
+          'romaji2kana',
+          'kana-free-text',
+        ] as KanaQuizExerciseType[]
+      ).filter((type) => exerciseTypes[type] === true),
     });
   }
 
@@ -183,6 +198,39 @@ const KanaQuizStart: Component<KanaQuizStartProps> = (props) => {
             </div>
           </fieldset>
         </div>
+      </div>
+
+      <div class="my-6 grid grid-cols-3 gap-2">
+        <label>
+          <input
+            type="checkbox"
+            checked={exerciseTypes.kana2romaji}
+            onChange={(el) =>
+              setExerciseTypes('kana2romaji', el.currentTarget.checked)
+            }
+          />{' '}
+          Kana To Romaji
+        </label>
+        <label>
+          <input
+            type="checkbox"
+            checked={exerciseTypes.romaji2kana}
+            onChange={(el) =>
+              setExerciseTypes('romaji2kana', el.currentTarget.checked)
+            }
+          />{' '}
+          Romaji To Kana
+        </label>
+        <label>
+          <input
+            type="checkbox"
+            checked={exerciseTypes['kana-free-text']}
+            onChange={(el) =>
+              setExerciseTypes('kana-free-text', el.currentTarget.checked)
+            }
+          />{' '}
+          Kana Free Text
+        </label>
       </div>
 
       <div class="text-center">
