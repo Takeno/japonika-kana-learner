@@ -53,7 +53,7 @@ const KanaQuiz: Component = () => {
             />
           </Match>
           <Match when={game.state() === 'summary'}>
-            <Summary results={game.results()} />
+            <Summary kanas={game.kanas()} results={game.results()} />
           </Match>
         </Switch>
       </div>
