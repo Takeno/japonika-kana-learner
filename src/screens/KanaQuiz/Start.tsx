@@ -188,16 +188,14 @@ function KanaChooser(props: KanaChooserProps) {
       <div class="grid grid-cols-2 gap-2">
         <For each={props.entries}>
           {([key, items]) => (
-            <label class="flex cursor-pointer">
+            <label class="flex cursor-pointer space-x-3">
               <input
                 type="checkbox"
                 checked={props.selectedKanas.includes(key)}
                 onClick={() => props.onChoose(key)}
-                class="w-3"
+                class="w-3 mr-2"
               />
-              <div class="flex-1 ml-2 mr-4 flex justify-around">
-                <For each={items}>{(item) => <span>{item}</span>}</For>
-              </div>
+              <For each={items}>{(item) => <span>{item}</span>}</For>
             </label>
           )}
         </For>

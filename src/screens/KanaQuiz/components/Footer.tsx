@@ -4,12 +4,12 @@ import logo from '../../../assets/japonika.png';
 
 const Footer: Component = () => {
   return (
-    <footer class="w-full py-4 bg-slate-600 flex flex-col items-center">
+    <footer class="w-full py-4 bg-gray-100 flex flex-col items-center">
       <a href="https://japonika.it" class="hover:underline">
         <img src={logo} alt="Japonika" class="w-64" />
       </a>
 
-      <p class="text-white mt-4 text-center">
+      <p class="text-black mt-4 text-center">
         Made with ❤️ by{' '}
         <a href="https://github.com/Takeno" class="hover:underline">
           @takeno

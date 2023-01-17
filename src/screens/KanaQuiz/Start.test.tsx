@@ -19,7 +19,7 @@ describe('<Start />', () => {
   test('selected rows are green', () => {
     const {unmount, getByText} = render(() => <Start onStart={() => {}} />);
 
-    const firstRow = getByText('あ').parentElement!.parentElement!;
+    const firstRow = getByText('あ').parentElement!;
 
     const checkbox = within(firstRow).getByRole<HTMLInputElement>('checkbox');
     expect(checkbox.checked).toBe(false);
