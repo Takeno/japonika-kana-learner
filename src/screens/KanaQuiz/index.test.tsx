@@ -16,7 +16,7 @@ describe('<KanaQuiz />', () => {
 
     expect(getByText('Benvenuto!')).toBeDefined();
 
-    fireEvent.click(getByText('あいうえお'));
+    fireEvent.click(getByText('あ'));
 
     fireEvent.click(getByText('Start'));
 

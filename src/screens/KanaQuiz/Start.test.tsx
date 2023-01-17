@@ -19,7 +19,7 @@ describe('<Start />', () => {
   test('selected rows are green', () => {
     const {unmount, getByText} = render(() => <Start onStart={() => {}} />);
 
-    const firstRow = getByText('あいうえお');
+    const firstRow = getByText('あ').parentElement!.parentElement!;
 
     const checkbox = within(firstRow).getByRole<HTMLInputElement>('checkbox');
     expect(checkbox.checked).toBe(false);
@@ -35,7 +35,7 @@ describe('<Start />', () => {
 
     const {unmount, queryByText} = render(() => <Start onStart={onStart} />);
 
-    const firstRow = queryByText('あいうえお');
+    const firstRow = queryByText('あ');
     fireEvent.click(firstRow!);
 
     const button = queryByText('Start');
@@ -56,7 +56,7 @@ describe('<Start />', () => {
 
     const {unmount, getByText} = render(() => <Start onStart={onStart} />);
 
-    fireEvent.click(getByText('あいうえお'));
+    fireEvent.click(getByText('あ'));
 
     fireEvent.click(getByText('Kana To Romaji'));
     fireEvent.click(getByText('Romaji To Kana'));

@@ -1,6 +1,11 @@
 import {Component, createSignal, For} from 'solid-js';
 import {createStore} from 'solid-js/store';
-import {AllKana, HIRAGANA_GROUPS, KATAKANA_GROUPS} from '../../utils/kana';
+import {
+  AllKana,
+  ALL_KANA,
+  HIRAGANA_GROUPS,
+  KATAKANA_GROUPS,
+} from '../../utils/kana';
 import {ObjectEntries} from '../../utils/utils';
 
 type KanaQuizStartProps = {
@@ -66,123 +71,52 @@ const KanaQuizStart: Component<KanaQuizStartProps> = (props) => {
       <div class="grid sm:grid-cols-2 gap-8 my-4 -mx-4">
         <div class="bg-gray-50 p-4">
           <h3 class="text-center text-2xl">Hiragana</h3>
-          <fieldset class="my-2">
-            <legend class="block text-center">Suoni puri</legend>
-            <div class="grid grid-cols-2 gap-2">
-              <For each={ObjectEntries(HIRAGANA_GROUPS).slice(0, 10)}>
-                {([key, items]) => (
-                  <label class="block cursor-pointer">
-                    <input
-                      type="checkbox"
-                      checked={selectedKanas().includes(key)}
-                      onClick={() => toggleSelection(key)}
-                      class="mx-2"
-                    />
-                    {items.join('')}
-                  </label>
-                )}
-              </For>
-            </div>
-          </fieldset>
 
-          <fieldset class="my-2">
-            <legend class="block text-center">Suoni impuri</legend>
-            <div class="grid grid-cols-2 gap-2">
-              <For each={ObjectEntries(HIRAGANA_GROUPS).slice(10, 15)}>
-                {([key, items]) => (
-                  <label class="block cursor-pointer">
-                    <input
-                      type="checkbox"
-                      checked={selectedKanas().includes(key)}
-                      onClick={() => toggleSelection(key)}
-                      class="mx-2"
-                    />
-                    {items.join('')}
-                  </label>
-                )}
-              </For>
-            </div>
-          </fieldset>
+          <KanaChooser
+            label="Suoni puri"
+            entries={ObjectEntries(HIRAGANA_GROUPS).slice(0, 10)}
+            selectedKanas={selectedKanas()}
+            onChoose={toggleSelection}
+          />
 
-          <fieldset class="my-2">
-            <legend class="block text-center">Suoni contratti</legend>
-            <div class="grid grid-cols-2 gap-2">
-              <For each={ObjectEntries(HIRAGANA_GROUPS).slice(15)}>
-                {([key, items]) => (
-                  <label class="block cursor-pointer">
-                    <input
-                      type="checkbox"
-                      checked={selectedKanas().includes(key)}
-                      onClick={() => toggleSelection(key)}
-                      class="mx-2"
-                    />
-                    {items.join('')}
-                  </label>
-                )}
-              </For>
-            </div>
-          </fieldset>
+          <KanaChooser
+            label="Suoni impuri"
+            entries={ObjectEntries(HIRAGANA_GROUPS).slice(10, 15)}
+            selectedKanas={selectedKanas()}
+            onChoose={toggleSelection}
+          />
+
+          <KanaChooser
+            label="Suoni contratti"
+            entries={ObjectEntries(HIRAGANA_GROUPS).slice(15)}
+            selectedKanas={selectedKanas()}
+            onChoose={toggleSelection}
+          />
         </div>
 
         <div class="bg-gray-50 p-4">
           <h3 class="text-center text-2xl">Katakana</h3>
 
-          <fieldset class="my-2">
-            <legend class="block text-center">Suoni puri</legend>
-            <div class="grid grid-cols-2 gap-2">
-              <For each={ObjectEntries(KATAKANA_GROUPS).slice(0, 10)}>
-                {([key, items]) => (
-                  <label class="block cursor-pointer">
-                    <input
-                      type="checkbox"
-                      checked={selectedKanas().includes(key)}
-                      onClick={() => toggleSelection(key)}
-                      class="mx-2"
-                    />
-                    {items.join('')}
-                  </label>
-                )}
-              </For>
-            </div>
-          </fieldset>
+          <KanaChooser
+            label="Suoni puri"
+            entries={ObjectEntries(KATAKANA_GROUPS).slice(0, 10)}
+            selectedKanas={selectedKanas()}
+            onChoose={toggleSelection}
+          />
 
-          <fieldset class="my-2">
-            <legend class="block text-center">Suoni impuri</legend>
-            <div class="grid grid-cols-2 gap-2">
-              <For each={ObjectEntries(KATAKANA_GROUPS).slice(10, 15)}>
-                {([key, items]) => (
-                  <label class="block cursor-pointer">
-                    <input
-                      type="checkbox"
-                      checked={selectedKanas().includes(key)}
-                      onClick={() => toggleSelection(key)}
-                      class="mx-2"
-                    />
-                    {items.join('')}
-                  </label>
-                )}
-              </For>
-            </div>
-          </fieldset>
+          <KanaChooser
+            label="Suoni impuri"
+            entries={ObjectEntries(KATAKANA_GROUPS).slice(10, 15)}
+            selectedKanas={selectedKanas()}
+            onChoose={toggleSelection}
+          />
 
-          <fieldset class="my-2">
-            <legend class="block text-center">Suoni contratti</legend>
-            <div class="grid grid-cols-2 gap-2">
-              <For each={ObjectEntries(KATAKANA_GROUPS).slice(15)}>
-                {([key, items]) => (
-                  <label class="block cursor-pointer">
-                    <input
-                      type="checkbox"
-                      checked={selectedKanas().includes(key)}
-                      onClick={() => toggleSelection(key)}
-                      class="mx-2"
-                    />
-                    {items.join('')}
-                  </label>
-                )}
-              </For>
-            </div>
-          </fieldset>
+          <KanaChooser
+            label="Suoni contratti"
+            entries={ObjectEntries(KATAKANA_GROUPS).slice(15)}
+            selectedKanas={selectedKanas()}
+            onChoose={toggleSelection}
+          />
         </div>
       </div>
 
@@ -239,3 +173,35 @@ const KanaQuizStart: Component<KanaQuizStartProps> = (props) => {
 };
 
 export default KanaQuizStart;
+
+type KanaChooserProps = {
+  label: string;
+  entries: [KanaGroup, readonly AllKana[]][];
+  selectedKanas: KanaGroup[];
+  onChoose: (key: KanaGroup) => void;
+};
+
+function KanaChooser(props: KanaChooserProps) {
+  return (
+    <fieldset class="my-2">
+      <legend class="block text-center">{props.label}</legend>
+      <div class="grid grid-cols-2 gap-2">
+        <For each={props.entries}>
+          {([key, items]) => (
+            <label class="flex cursor-pointer">
+              <input
+                type="checkbox"
+                checked={props.selectedKanas.includes(key)}
+                onClick={() => props.onChoose(key)}
+                class="w-3"
+              />
+              <div class="flex-1 ml-2 mr-4 flex justify-around">
+                <For each={items}>{(item) => <span>{item}</span>}</For>
+              </div>
+            </label>
+          )}
+        </For>
+      </div>
+    </fieldset>
+  );
+}

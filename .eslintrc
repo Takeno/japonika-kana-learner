@@ -3,6 +3,7 @@
   "plugins": ["solid"],
   "rules": {
     "testing-library/prefer-screen-queries": 0,
+    "testing-library/no-node-access": "warn",
     "react-hooks/rules-of-hooks": 0,
     "react/prop-types": 0
   }
