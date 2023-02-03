@@ -45,7 +45,7 @@ describe('<Start />', () => {
     fireEvent.click(button!);
 
     expect(onStart).toBeCalledWith(['あ', 'い', 'う', 'え', 'お'], {
-      exerciseTypes: ['kana2romaji', 'romaji2kana', 'kana-free-text'],
+      exerciseTypes: ['kana2romaji'],
     });
 
     unmount();
@@ -59,7 +59,7 @@ describe('<Start />', () => {
     fireEvent.click(getByText('あ'));
 
     fireEvent.click(getByText('Kana To Romaji'));
-    fireEvent.click(getByText('Romaji To Kana'));
+    fireEvent.click(getByText('Kana Free Text'));
 
     fireEvent.click(getByText('Start'));
 

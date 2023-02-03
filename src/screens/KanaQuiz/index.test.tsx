@@ -18,6 +18,8 @@ describe('<KanaQuiz />', () => {
 
     fireEvent.click(getByText('あ'));
 
+    fireEvent.click(getByText('Romaji To Kana'));
+    fireEvent.click(getByText('Kana Free Text'));
     fireEvent.click(getByText('Start'));
 
     expect(getByText('Kana to Romaji')).toBeDefined();

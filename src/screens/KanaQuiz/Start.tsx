@@ -28,8 +28,8 @@ const KanaQuizStart: Component<KanaQuizStartProps> = (props) => {
     [k in KanaQuizExerciseType]: boolean;
   }>({
     kana2romaji: true,
-    romaji2kana: true,
-    'kana-free-text': true,
+    romaji2kana: false,
+    'kana-free-text': false,
   });
 
   function toggleSelection(group: KanaGroup) {

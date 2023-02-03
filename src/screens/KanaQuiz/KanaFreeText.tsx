@@ -37,7 +37,6 @@ const KanaFreeText: Component<KanaFreeTextProps> = (props) => {
   }
 
   function handleAnswer(correct: boolean, index: number) {
-    console.log({correct, index});
     const allInputs = inputsContainer.querySelectorAll('input');
 
     if (correct) {
