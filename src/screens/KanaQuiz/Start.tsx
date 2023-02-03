@@ -1,5 +1,7 @@
 import {Component, createSignal, For} from 'solid-js';
 import {createStore} from 'solid-js/store';
+import KanaFontSwitcher from '../../components/KanaFontSwitcher';
+import {useTheme} from '../../contexts/ThemeContext';
 import {
   AllKana,
   ALL_KANA,
@@ -159,6 +161,14 @@ const KanaQuizStart: Component<KanaQuizStartProps> = (props) => {
         </label>
       </div>
 
+      <h3 class="text-center text-2xl">Font</h3>
+      <div class="my-2 text-center">
+        <p class="italic mt-2">
+          Scegli il font con le grazie (Noto Serif) o senza (Noto Sans).
+        </p>
+        <KanaFontSwitcher />
+      </div>
+
       <div class="text-center">
         <button
           class="border-2 px-4 py-2 rounded-xl uppercase"
@@ -182,6 +192,8 @@ type KanaChooserProps = {
 };
 
 function KanaChooser(props: KanaChooserProps) {
+  const [theme] = useTheme();
+
   return (
     <fieldset class="my-2">
       <legend class="block text-center">{props.label}</legend>
@@ -195,7 +207,18 @@ function KanaChooser(props: KanaChooserProps) {
                 onClick={() => props.onChoose(key)}
                 class="w-3 mr-2"
               />
-              <For each={items}>{(item) => <span>{item}</span>}</For>
+              <For each={items}>
+                {(item) => (
+                  <span
+                    classList={{
+                      'font-NotoSerif': theme.kanaFont === 'serif',
+                      'font-NotoSans': theme.kanaFont === 'sans',
+                    }}
+                  >
+                    {item}
+                  </span>
+                )}
+              </For>
             </label>
           )}
         </For>

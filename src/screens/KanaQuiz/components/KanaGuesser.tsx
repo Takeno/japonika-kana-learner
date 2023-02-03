@@ -1,4 +1,5 @@
 import {Component, createEffect, createSignal, For, JSX} from 'solid-js';
+import {useTheme} from '../../../contexts/ThemeContext';
 
 type KanaGuesserProps = {
   mainChar: string;
@@ -8,6 +9,8 @@ type KanaGuesserProps = {
 };
 
 const KanaGuesser: Component<KanaGuesserProps> = (props) => {
+  const [theme] = useTheme();
+
   const [error, setError] = createSignal<number | null>(null);
   const [success, setSuccess] = createSignal<number | null>(null);
 
@@ -23,7 +26,13 @@ const KanaGuesser: Component<KanaGuesserProps> = (props) => {
 
   return (
     <div class="flex flex-row border-2 border-black rounded-md mx-auto">
-      <div class="h-16 w-16 border-r-2 border-black flex items-center justify-center text-3xl">
+      <div
+        class="h-16 w-16 border-r-2 border-black flex items-center justify-center text-3xl"
+        classList={{
+          'font-NotoSerif': theme.kanaFont === 'serif',
+          'font-NotoSans': theme.kanaFont === 'sans',
+        }}
+      >
         {props.mainChar}
       </div>
 

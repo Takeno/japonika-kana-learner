@@ -33,7 +33,8 @@
   },
   "dependencies": {
     "@solidjs/router": "^0.6.0",
-    "solid-js": "^1.6.7"
+    "solid-js": "^1.6.7",
+    "zod": "^3.20.2"
   },
   "lint-staged": {
     "*.{ts,tsx,js,jsx}": "eslint --fix"

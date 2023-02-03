@@ -1,4 +1,5 @@
 import {Component, JSX} from 'solid-js';
+import {useTheme} from '../../../contexts/ThemeContext';
 
 type KanaInputProps = {
   mainChar: string;
@@ -7,6 +8,8 @@ type KanaInputProps = {
 };
 
 const KanaInput: Component<KanaInputProps> = (props) => {
+  const [theme] = useTheme();
+
   const verify = (el: HTMLInputElement) => {
     const val = el.value.toLowerCase().trim();
 
@@ -54,7 +57,13 @@ const KanaInput: Component<KanaInputProps> = (props) => {
 
   return (
     <label class="flex flex-row border-2 border-black rounded-md mx-auto">
-      <div class="h-16 w-16 border-r-2 border-black flex items-center justify-center text-3xl">
+      <div
+        class="h-16 w-16 border-r-2 border-black flex items-center justify-center text-3xl"
+        classList={{
+          'font-NotoSerif': theme.kanaFont === 'serif',
+          'font-NotoSans': theme.kanaFont === 'sans',
+        }}
+      >
         {props.mainChar}
       </div>
 
