@@ -72,7 +72,18 @@ const KanaQuizStart: Component<KanaQuizStartProps> = (props) => {
 
       <div class="grid sm:grid-cols-2 gap-8 my-4 -mx-4">
         <div class="bg-gray-50 p-4">
-          <h3 class="text-center text-2xl">Hiragana</h3>
+          <h3
+            class="text-center text-2xl cursor-pointer"
+            onClick={() =>
+              ObjectEntries(HIRAGANA_GROUPS).forEach(([key]) =>
+                setSelectedKanas((old) =>
+                  old.includes(key) ? old : old.concat(key)
+                )
+              )
+            }
+          >
+            Hiragana
+          </h3>
 
           <KanaChooser
             label="Suoni puri"
@@ -97,7 +108,18 @@ const KanaQuizStart: Component<KanaQuizStartProps> = (props) => {
         </div>
 
         <div class="bg-gray-50 p-4">
-          <h3 class="text-center text-2xl">Katakana</h3>
+          <h3
+            class="text-center text-2xl cursor-pointer"
+            onClick={() =>
+              ObjectEntries(KATAKANA_GROUPS).forEach(([key]) =>
+                setSelectedKanas((old) =>
+                  old.includes(key) ? old : old.concat(key)
+                )
+              )
+            }
+          >
+            Katakana
+          </h3>
 
           <KanaChooser
             label="Suoni puri"
@@ -194,9 +216,33 @@ type KanaChooserProps = {
 function KanaChooser(props: KanaChooserProps) {
   const [theme] = useTheme();
 
+  const allSelected = () =>
+    props.entries.every(([key]) => props.selectedKanas.includes(key));
+
+  const selectAll = () => {
+    if (allSelected()) {
+      props.entries.forEach(([key]) => props.onChoose(key));
+      return;
+    }
+
+    for (let [key] of props.entries) {
+      if (props.selectedKanas.includes(key) === false) {
+        props.onChoose(key);
+      }
+    }
+  };
+
   return (
     <fieldset class="my-2">
-      <legend class="block text-center">{props.label}</legend>
+      <label class="block text-center">
+        <input
+          type="checkbox"
+          checked={allSelected()}
+          onClick={selectAll}
+          class="w-3 mr-2"
+        />{' '}
+        {props.label}
+      </label>
       <div class="grid grid-cols-2 gap-2">
         <For each={props.entries}>
           {([key, items]) => (
