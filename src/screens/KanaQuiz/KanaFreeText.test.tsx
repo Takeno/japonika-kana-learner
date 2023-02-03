@@ -97,4 +97,25 @@ describe('<KanaFreeText>', () => {
 
     unmount();
   });
+
+  it('should allow submit without all exercises completed', async () => {
+    const handleExerciseCompleted = vi.fn();
+
+    const {unmount, getByText} = render(() => (
+      <KanaFreeText
+        kanas={['あ', 'い']}
+        onExerciseCompleted={handleExerciseCompleted}
+      />
+    ));
+
+    fireEvent.click(getByText('Next'));
+
+    expect(handleExerciseCompleted).toHaveBeenCalledWith({
+      elapsedTime: 0,
+      failedAttempts: 2,
+      successStrikePercentage: 0,
+    });
+
+    unmount();
+  });
 });

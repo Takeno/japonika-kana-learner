@@ -16,14 +16,10 @@ const KanaFreeText: Component<KanaFreeTextProps> = (props) => {
   });
 
   function handleFinish() {
-    if (!game().allCompleted()) {
-      return;
-    }
-
     const result: ExerciseResult = {
       elapsedTime: Math.round((Date.now() - game().startDate.getTime()) / 1000),
       failedAttempts: game().results.reduce(
-        (acc, r) => acc + r.attempts - 1,
+        (acc, r) => acc + (r.attempts === 0 ? 1 : r.attempts - 1),
         0
       ),
       successStrikePercentage: Math.round(
@@ -81,7 +77,6 @@ const KanaFreeText: Component<KanaFreeTextProps> = (props) => {
       <div class="text-center">
         <button
           class="border-2 px-4 py-2 rounded-xl uppercase"
-          disabled={!game().allCompleted()}
           onClick={handleFinish}
         >
           Next
