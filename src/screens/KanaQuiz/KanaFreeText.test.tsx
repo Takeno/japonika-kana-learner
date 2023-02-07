@@ -110,7 +110,9 @@ describe('<KanaFreeText>', () => {
 
     fireEvent.click(getByText('Next'));
 
-    expect(handleExerciseCompleted).toHaveBeenCalledWith({
+    expect(handleExerciseCompleted).toHaveBeenCalledTimes(1);
+
+    expect(handleExerciseCompleted.mock.calls[0][0]).toMatchObject({
       elapsedTime: 0,
       failedAttempts: 2,
       successStrikePercentage: 0,

@@ -1,21 +1,16 @@
 import {Accessor, Component, For} from 'solid-js';
 import {AllKana} from '../../utils/kana';
 import {formatTime} from '../../utils/utils';
+import KanaResultReport from './components/KanaResultReport';
 
 type SummaryProps = {
   kanas: AllKana[];
-  results: ExerciseResult[];
+  results: ExerciseResult<AllKana>[];
 };
 
 const Summary: Component<SummaryProps> = (props) => {
   const totalElapsedTime: Accessor<string> = () =>
     formatTime(props.results.reduce((acc, r) => acc + r.elapsedTime, 0));
-
-  // const totalSuccesStrike: Accessor<number> = () =>
-  //   Math.round(
-  //     props.results.reduce((acc, r) => acc + r.successStrikePercentage, 0) /
-  //       props.results.length
-  //   );
 
   const handleSharing = async () => {
     const text = renderSharingText(props.kanas, props.results);
@@ -37,9 +32,6 @@ const Summary: Component<SummaryProps> = (props) => {
       <div class="grid grid-cols-2 mt-2 mb-4">
         <dt class="font-medium">Tempo totale:</dt>
         <dd>{totalElapsedTime()}</dd>
-
-        {/* <dt class="font-medium">Percentuale:</dt>
-        <dd>{totalSuccesStrike()}%</dd> */}
       </div>
 
       <For each={props.results}>
@@ -58,7 +50,9 @@ const Summary: Component<SummaryProps> = (props) => {
         )}
       </For>
 
-      <div class="flex flex-row gap-2">
+      <KanaResultReport results={props.results} />
+
+      <div class="flex flex-row gap-2 my-6">
         <button
           class="border-2 px-4 py-2 rounded-xl uppercase"
           onClick={handleSharing}
@@ -80,7 +74,7 @@ export default Summary;
 
 function renderSharingText(
   kanas: AllKana[],
-  results: ExerciseResult[]
+  results: ExerciseResult<AllKana>[]
 ): string {
   const totalElapsedTime = formatTime(
     results.reduce((acc, r) => acc + r.elapsedTime, 0)
@@ -93,7 +87,7 @@ function renderSharingText(
     return new Array(green).fill('🟩').join('').padEnd(10, '🟨');
   });
 
-  return `Kana Quiz by Japonika.it
+  return `Kana Quiz by japonika.it
 ${kanas.length} kana memorizzati in ${totalElapsedTime}!
 ${strikes.join('\n')}`;
 }

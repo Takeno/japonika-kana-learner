@@ -12,11 +12,25 @@ describe('<Summary />', () => {
             elapsedTime: 10,
             failedAttempts: 4,
             successStrikePercentage: 80,
+            items: [
+              {
+                completed: true,
+                failedAttempts: 4,
+                item: 'あ',
+              },
+            ],
           },
           {
             elapsedTime: 18,
             failedAttempts: 2,
             successStrikePercentage: 60,
+            items: [
+              {
+                completed: true,
+                failedAttempts: 2,
+                item: 'あ',
+              },
+            ],
           },
         ]}
       />
@@ -48,16 +62,37 @@ describe('<Summary />', () => {
             elapsedTime: 10,
             failedAttempts: 4,
             successStrikePercentage: 100,
+            items: [
+              {
+                completed: true,
+                failedAttempts: 4,
+                item: 'あ',
+              },
+            ],
           },
           {
             elapsedTime: 18,
             failedAttempts: 2,
             successStrikePercentage: 80,
+            items: [
+              {
+                completed: true,
+                failedAttempts: 2,
+                item: 'あ',
+              },
+            ],
           },
           {
             elapsedTime: 10,
             failedAttempts: 2,
             successStrikePercentage: 100,
+            items: [
+              {
+                completed: true,
+                failedAttempts: 2,
+                item: 'あ',
+              },
+            ],
           },
         ]}
       />

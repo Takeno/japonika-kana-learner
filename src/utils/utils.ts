@@ -97,3 +97,29 @@ export function calculateRomajiExercise(
     correct: allAnswers.indexOf(correctAnswer) as 0 | 1 | 2 | 3,
   };
 }
+
+export function calculateKanaErrors(
+  input: ExerciseResult<AllKana>[]
+): {kana: AllKana; romaji: string; errors: number}[] {
+  if (input.length === 0) {
+    return [];
+  }
+
+  return ObjectEntries(ALL_KANA)
+    .map(([kana, romaji]) => ({
+      kana: kana,
+      romaji: romaji,
+    }))
+    .filter(({kana}) => input[0].items.some((item) => item.item === kana))
+    .map((result) => ({
+      ...result,
+      errors: input.reduce(
+        (acc, res) =>
+          acc +
+          res.items
+            .filter((item) => item.item === result.kana)
+            .reduce((acc, item) => acc + item.failedAttempts, 0),
+        0
+      ),
+    }));
+}

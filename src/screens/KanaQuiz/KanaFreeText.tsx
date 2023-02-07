@@ -1,48 +1,37 @@
-import {Component, createMemo, For, onMount} from 'solid-js';
+import {Component, For, onMount} from 'solid-js';
 import KanaInput from './components/KanaInput';
 import Timer from './components/Timer';
-import usePhaseOne from '../../stores/usePhaseOne';
 import {AllKana, ALL_KANA} from '../../utils/kana';
+import createKanaExercise from '../../stores/createKanaExercise';
 
 type KanaFreeTextProps = KanaQuizExerciseProps<AllKana>;
 
 const KanaFreeText: Component<KanaFreeTextProps> = (props) => {
   let inputsContainer: HTMLDivElement;
 
-  const game = createMemo(() => usePhaseOne(props.kanas.length));
+  const exercise = createKanaExercise({
+    kanas: new Set(props.kanas),
+  });
 
   onMount(() => {
     inputsContainer.querySelector('input')?.focus();
   });
 
   function handleFinish() {
-    const result: ExerciseResult = {
-      elapsedTime: Math.round((Date.now() - game().startDate.getTime()) / 1000),
-      failedAttempts: game().results.reduce(
-        (acc, r) => acc + (r.attempts === 0 ? 1 : r.attempts - 1),
-        0
-      ),
-      successStrikePercentage: Math.round(
-        100 *
-          (game().results.filter((r) => r.attempts === 1).length /
-            game().results.length)
-      ),
-    };
+    const exerciseResult = exercise.exerciseResult();
 
-    props.onExerciseCompleted(result);
+    props.onExerciseCompleted(exerciseResult);
   }
 
   function handleAnswer(correct: boolean, index: number) {
     const allInputs = inputsContainer.querySelectorAll('input');
+    exercise.setAttempt(index, correct);
 
     if (correct) {
-      game().setExerciseCompleted(index);
       if (index !== allInputs.length - 1) {
         allInputs.item(index + 1).focus();
       }
     } else {
-      game().setExerciseFail(index);
-
       allInputs.item(index).focus();
     }
   }
@@ -53,7 +42,7 @@ const KanaFreeText: Component<KanaFreeTextProps> = (props) => {
         <h1 class="text-3xl">Kana Free Text</h1>
 
         <span>
-          Timer: <Timer startDate={game().startDate} />
+          Timer: <Timer startDate={exercise.startDate} />
         </span>
       </div>
 
@@ -63,11 +52,11 @@ const KanaFreeText: Component<KanaFreeTextProps> = (props) => {
         ref={(el) => (inputsContainer = el)}
         class="grid grid-cols-1 sm:grid-cols-2 gap-4 my-6"
       >
-        <For each={props.kanas}>
+        <For each={exercise.results()}>
           {(item, index) => (
             <KanaInput
-              mainChar={item}
-              correct={ALL_KANA[item]}
+              mainChar={item.item}
+              correct={ALL_KANA[item.item]}
               onAnswer={(correct) => handleAnswer(correct, index())}
             />
           )}

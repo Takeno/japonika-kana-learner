@@ -2,12 +2,7 @@ import {Component, createSignal, For} from 'solid-js';
 import {createStore} from 'solid-js/store';
 import KanaFontSwitcher from '../../components/KanaFontSwitcher';
 import {useTheme} from '../../contexts/ThemeContext';
-import {
-  AllKana,
-  ALL_KANA,
-  HIRAGANA_GROUPS,
-  KATAKANA_GROUPS,
-} from '../../utils/kana';
+import {AllKana, HIRAGANA_GROUPS, KATAKANA_GROUPS} from '../../utils/kana';
 import {ObjectEntries} from '../../utils/utils';
 
 type KanaQuizStartProps = {

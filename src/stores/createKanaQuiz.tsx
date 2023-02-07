@@ -12,7 +12,7 @@ type KanaQuizStore = {
   kanas: AllKana[];
   exerciseTypes: KanaQuizExerciseType[];
   currentExercise: number;
-  results: ExerciseResult[];
+  results: ExerciseResult<AllKana>[];
 };
 
 export default function createKanaQuiz() {
@@ -27,13 +27,13 @@ export default function createKanaQuiz() {
   const startGame = (kanas: AllKana[], config: KanaQuizConfig) => {
     setStore({
       state: 'exercise',
-      kanas: kanas.sort(() => 0.5 - Math.random()),
+      kanas: kanas,
       exerciseTypes: config.exerciseTypes,
       currentExercise: 0,
     });
   };
 
-  const handleExerciseCompleted = (result: ExerciseResult) => {
+  const handleExerciseCompleted = (result: ExerciseResult<AllKana>) => {
     setStore('results', store.currentExercise, result);
 
     if (store.currentExercise === store.exerciseTypes.length - 1) {

@@ -1,38 +1,31 @@
-import {Component, createMemo, For} from 'solid-js';
+import {Component, For} from 'solid-js';
 import type {AllKana} from '../../utils/kana';
 
 import KanaGuesser from './components/KanaGuesser';
 import {calculateRomajiExercise} from '../../utils/utils';
-import usePhaseOne from '../../stores/usePhaseOne';
 import Timer from './components/Timer';
+import createKanaExercise from '../../stores/createKanaExercise';
 
 type RomajiToKanaProps = KanaQuizExerciseProps<AllKana>;
 
 const RomajiToKana: Component<RomajiToKanaProps> = (props) => {
-  const game = createMemo(() => usePhaseOne(props.kanas.length));
+  const exercise = createKanaExercise({
+    kanas: new Set(props.kanas),
+  });
 
   const exercises = () =>
-    props.kanas.map((kana) => calculateRomajiExercise(kana, props.kanas));
+    exercise
+      .results()
+      .map((item) => calculateRomajiExercise(item.item, props.kanas));
 
   function handleFinish() {
-    if (!game().allCompleted()) {
+    if (!exercise.allCompleted()) {
       return;
     }
 
-    const result: ExerciseResult = {
-      elapsedTime: Math.round((Date.now() - game().startDate.getTime()) / 1000),
-      failedAttempts: game().results.reduce(
-        (acc, r) => acc + r.attempts - 1,
-        0
-      ),
-      successStrikePercentage: Math.round(
-        100 *
-          (game().results.filter((r) => r.attempts === 1).length /
-            game().results.length)
-      ),
-    };
+    const exerciseResult = exercise.exerciseResult();
 
-    props.onExerciseCompleted(result);
+    props.onExerciseCompleted(exerciseResult);
   }
 
   return (
@@ -41,7 +34,7 @@ const RomajiToKana: Component<RomajiToKanaProps> = (props) => {
         <h1 class="text-3xl">Romaji to Kana</h1>
 
         <span>
-          Timer: <Timer startDate={game().startDate} />
+          Timer: <Timer startDate={exercise.startDate} />
         </span>
       </div>
 
@@ -52,11 +45,7 @@ const RomajiToKana: Component<RomajiToKanaProps> = (props) => {
               mainChar={item.romaji}
               answers={item.answers}
               correct={item.correct}
-              onAnswer={(_, correct) =>
-                correct
-                  ? game().setExerciseCompleted(index())
-                  : game().setExerciseFail(index())
-              }
+              onAnswer={(_, correct) => exercise.setAttempt(index(), correct)}
             />
           )}
         </For>
@@ -65,7 +54,7 @@ const RomajiToKana: Component<RomajiToKanaProps> = (props) => {
       <div class="text-center">
         <button
           class="border-2 px-4 py-2 rounded-xl uppercase"
-          disabled={!game().allCompleted()}
+          disabled={!exercise.allCompleted()}
           onClick={handleFinish}
         >
           Next
