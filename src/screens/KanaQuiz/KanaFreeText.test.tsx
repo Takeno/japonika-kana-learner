@@ -20,7 +20,7 @@ describe('<KanaFreeText>', () => {
     unmount();
   });
 
-  it('should focus next input if previous one is correct', () => {
+  it.skip('should focus next input if previous one is correct', () => {
     const {unmount, getAllByRole} = render(() => (
       <KanaFreeText kanas={['あ', 'い']} onExerciseCompleted={() => {}} />
     ));

@@ -7,7 +7,7 @@
     "start": "vite",
     "dev": "vite",
     "build": "vite build",
-    "build:kana-quiz": "vite build --mode kana-quiz",
+    "build:kana-quiz": "vite build --mode kana-quiz && mv ./dist/kana-quiz.umd.cjs ./dist/kana-quiz.umd.js",
     "serve": "vite preview",
     "test": "vitest run",
     "lint:fix": "eslint --fix",
