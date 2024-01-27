@@ -1,5 +1,5 @@
 import {vi, describe, expect, test} from 'vitest';
-import {fireEvent, render, within} from 'solid-testing-library';
+import {fireEvent, render, within} from '@solidjs/testing-library';
 import Start from './Start';
 
 describe('<Start />', () => {

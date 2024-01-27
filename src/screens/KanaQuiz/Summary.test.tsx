@@ -1,5 +1,5 @@
 import {describe, expect, it} from 'vitest';
-import {render, within} from 'solid-testing-library';
+import {render, within} from '@solidjs/testing-library';
 import Summary from './Summary';
 
 describe('<Summary />', () => {

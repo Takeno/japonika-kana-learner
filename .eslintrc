@@ -1,6 +1,7 @@
 {
   "extends": ["@improntaadvance", "plugin:solid/typescript"],
   "plugins": ["solid"],
+  "parser": "@typescript-eslint/parser",
   "rules": {
     "testing-library/prefer-screen-queries": 0,
     "testing-library/no-node-access": "warn",
