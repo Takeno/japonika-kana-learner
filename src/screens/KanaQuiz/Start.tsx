@@ -2,7 +2,12 @@ import {Component, createSignal, For, onMount} from 'solid-js';
 import {createStore} from 'solid-js/store';
 import KanaFontSwitcher from '../../components/KanaFontSwitcher';
 import {useTheme} from '../../contexts/ThemeContext';
-import {AllKana, HIRAGANA_GROUPS, KATAKANA_GROUPS} from '../../utils/kana';
+import {
+  ALL_KANA,
+  AllKana,
+  HIRAGANA_GROUPS,
+  KATAKANA_GROUPS,
+} from '../../utils/kana';
 import {ObjectEntries} from '../../utils/utils';
 import {trackEvent} from '../../utils/analytics';
 
@@ -27,6 +32,36 @@ const KanaQuizStart: Component<KanaQuizStartProps> = (props) => {
     romaji2kana: false,
     'kana-free-text': false,
   });
+
+  const allHiraganaSelected = () =>
+    ObjectEntries(HIRAGANA_GROUPS).every(([key]) =>
+      selectedKanas().includes(key)
+    );
+
+  function toggleAllHiragana() {
+    if (allHiraganaSelected() === true) {
+      setSelectedKanas((old) => old.filter((k) => !(k in HIRAGANA_GROUPS)));
+    } else {
+      ObjectEntries(HIRAGANA_GROUPS).forEach(([key]) =>
+        setSelectedKanas((old) => (old.includes(key) ? old : old.concat(key)))
+      );
+    }
+  }
+
+  const allKatakanaSelected = () =>
+    ObjectEntries(KATAKANA_GROUPS).every(([key]) =>
+      selectedKanas().includes(key)
+    );
+
+  function toggleAllKatakana() {
+    if (allKatakanaSelected() === true) {
+      setSelectedKanas((old) => old.filter((k) => !(k in KATAKANA_GROUPS)));
+    } else {
+      ObjectEntries(KATAKANA_GROUPS).forEach(([key]) =>
+        setSelectedKanas((old) => (old.includes(key) ? old : old.concat(key)))
+      );
+    }
+  }
 
   onMount(async () => {
     trackEvent('Exercises');
@@ -72,17 +107,16 @@ const KanaQuizStart: Component<KanaQuizStartProps> = (props) => {
 
       <div class="grid sm:grid-cols-2 gap-8 my-4 -mx-4">
         <div class="bg-gray-50 p-4">
-          <h3
-            class="text-center text-2xl cursor-pointer"
-            onClick={() =>
-              ObjectEntries(HIRAGANA_GROUPS).forEach(([key]) =>
-                setSelectedKanas((old) =>
-                  old.includes(key) ? old : old.concat(key)
-                )
-              )
-            }
-          >
-            Hiragana
+          <h3 class="text-center text-2xl cursor-pointer">
+            <label>
+              <input
+                type="checkbox"
+                checked={allHiraganaSelected()}
+                onClick={toggleAllHiragana}
+                class="w-3 mr-2"
+              />{' '}
+              Hiragana
+            </label>
           </h3>
 
           <KanaChooser
@@ -108,17 +142,16 @@ const KanaQuizStart: Component<KanaQuizStartProps> = (props) => {
         </div>
 
         <div class="bg-gray-50 p-4">
-          <h3
-            class="text-center text-2xl cursor-pointer"
-            onClick={() =>
-              ObjectEntries(KATAKANA_GROUPS).forEach(([key]) =>
-                setSelectedKanas((old) =>
-                  old.includes(key) ? old : old.concat(key)
-                )
-              )
-            }
-          >
-            Katakana
+          <h3 class="text-center text-2xl cursor-pointer">
+            <label>
+              <input
+                type="checkbox"
+                checked={allKatakanaSelected()}
+                onClick={toggleAllKatakana}
+                class="w-3 mr-2"
+              />{' '}
+              Katakana
+            </label>
           </h3>
 
           <KanaChooser
@@ -233,7 +266,7 @@ function KanaChooser(props: KanaChooserProps) {
   };
 
   return (
-    <fieldset class="my-2">
+    <fieldset class="my-4">
       <label class="block text-center">
         <input
           type="checkbox"
@@ -261,7 +294,11 @@ function KanaChooser(props: KanaChooserProps) {
                       'font-NotoSans': theme.kanaFont === 'sans',
                     }}
                   >
-                    {item}
+                    <ruby>
+                      {item} <rp>(</rp>
+                      <rt>{ALL_KANA[item]}</rt>
+                      <rp>)</rp>
+                    </ruby>
                   </span>
                 )}
               </For>
