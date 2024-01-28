@@ -1,9 +1,10 @@
-import {Component, createSignal, For} from 'solid-js';
+import {Component, createSignal, For, onMount} from 'solid-js';
 import {createStore} from 'solid-js/store';
 import KanaFontSwitcher from '../../components/KanaFontSwitcher';
 import {useTheme} from '../../contexts/ThemeContext';
 import {AllKana, HIRAGANA_GROUPS, KATAKANA_GROUPS} from '../../utils/kana';
 import {ObjectEntries} from '../../utils/utils';
+import {trackEvent} from '../../utils/analytics';
 
 type KanaQuizStartProps = {
   onStart: (
@@ -25,6 +26,10 @@ const KanaQuizStart: Component<KanaQuizStartProps> = (props) => {
     kana2romaji: true,
     romaji2kana: false,
     'kana-free-text': false,
+  });
+
+  onMount(async () => {
+    trackEvent('Exercises');
   });
 
   function toggleSelection(group: KanaGroup) {

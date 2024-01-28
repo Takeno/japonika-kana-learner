@@ -1,10 +1,11 @@
-import {Component, For} from 'solid-js';
+import {Component, For, onMount} from 'solid-js';
 import type {AllKana} from '../../utils/kana';
 
 import KanaGuesser from './components/KanaGuesser';
 import {calculateRomajiExercise} from '../../utils/utils';
 import Timer from './components/Timer';
 import createKanaExercise from '../../stores/createKanaExercise';
+import {trackEvent} from '../../utils/analytics';
 
 type RomajiToKanaProps = KanaQuizExerciseProps<AllKana>;
 
@@ -17,6 +18,10 @@ const RomajiToKana: Component<RomajiToKanaProps> = (props) => {
     exercise
       .results()
       .map((item) => calculateRomajiExercise(item.item, props.kanas));
+
+  onMount(async () => {
+    trackEvent('RomajiToKana');
+  });
 
   function handleFinish() {
     if (!exercise.allCompleted()) {

@@ -3,6 +3,7 @@ import KanaInput from './components/KanaInput';
 import Timer from './components/Timer';
 import {AllKana, ALL_KANA} from '../../utils/kana';
 import createKanaExercise from '../../stores/createKanaExercise';
+import {trackEvent} from '../../utils/analytics';
 
 type KanaFreeTextProps = KanaQuizExerciseProps<AllKana>;
 
@@ -15,6 +16,10 @@ const KanaFreeText: Component<KanaFreeTextProps> = (props) => {
 
   onMount(() => {
     inputsContainer.querySelector('input')?.focus();
+  });
+
+  onMount(async () => {
+    trackEvent('KanaFreeText');
   });
 
   function handleFinish() {

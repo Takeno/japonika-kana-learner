@@ -1,7 +1,8 @@
-import {Accessor, Component, For} from 'solid-js';
+import {Accessor, Component, For, onMount} from 'solid-js';
 import {AllKana} from '../../utils/kana';
 import {formatTime} from '../../utils/utils';
 import KanaResultReport from './components/KanaResultReport';
+import {trackEvent} from '../../utils/analytics';
 
 type SummaryProps = {
   kanas: AllKana[];
@@ -11,6 +12,16 @@ type SummaryProps = {
 const Summary: Component<SummaryProps> = (props) => {
   const totalElapsedTime: Accessor<string> = () =>
     formatTime(props.results.reduce((acc, r) => acc + r.elapsedTime, 0));
+
+  const serializedScore: Accessor<string> = () =>
+    props.results.map((r) => r.successStrikePercentage).join('_');
+
+  onMount(async () => {
+    trackEvent('Summary', {
+      totalElapsedTime: totalElapsedTime(),
+      score: serializedScore(),
+    });
+  });
 
   const handleSharing = async () => {
     const text = renderSharingText(props.kanas, props.results);
