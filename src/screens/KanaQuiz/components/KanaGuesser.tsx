@@ -25,9 +25,9 @@ const KanaGuesser: Component<KanaGuesserProps> = (props) => {
   }
 
   return (
-    <div class="flex flex-row border-2 border-black rounded-md mx-auto">
+    <div class="flex flex-row border-solid border-2 border-black rounded-md mx-auto">
       <div
-        class="h-16 w-16 border-r-2 border-black flex items-center justify-center text-3xl"
+        class="h-16 w-16 border-r-2  border-l-0 border-t-0 border-b-0 border-solid border-black flex items-center justify-center text-3xl"
         classList={{
           'font-NotoSerif': theme.kanaFont === 'serif',
           'font-NotoSans': theme.kanaFont === 'sans',
@@ -82,8 +82,9 @@ const Button: Component<ButtonProps> = (props) => {
 
   return (
     <button
-      class="border-2 rounded-md w-12 h-12 text-2xl box-border"
+      class="border-2 rounded-md w-12 h-12 text-2xl box-border border-solid border-gray-400 text-black hover:text-black"
       classList={{
+        'bg-white': !error() && props.state !== 'success',
         'bg-red-300': error(),
         'bg-green-300': props.state === 'success',
       }}

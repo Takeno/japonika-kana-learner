@@ -16,7 +16,7 @@ const KanaFontSwitcher: Component = function () {
     <select
       onChange={handleChange}
       value={theme.kanaFont}
-      class="border p-2 rounded-md"
+      class="border border-solid p-2 rounded-md"
     >
       <option value="sans">Noto Sans JP</option>
       <option value="serif">Noto Serif JP</option>

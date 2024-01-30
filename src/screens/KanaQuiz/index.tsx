@@ -5,7 +5,7 @@ import KanaQuiz from './KanaQuiz';
 
 const Page: Component = () => {
   return (
-    <main class="min-h-screen flex flex-col">
+    <main class="twrp min-h-screen flex flex-col">
       <Header />
       <KanaQuiz />
       <Footer />

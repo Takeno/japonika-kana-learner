@@ -67,6 +67,12 @@ devDependencies:
   tailwindcss:
     specifier: ^3.4.1
     version: 3.4.1
+  tailwindcss-base-font-size:
+    specifier: ^1.0.1
+    version: 1.0.1(tailwindcss@3.4.1)
+  tailwindcss-scoped-preflight:
+    specifier: ^2.1.0
+    version: 2.1.0(postcss@8.4.33)(tailwindcss@3.4.1)
   typescript:
     specifier: ^5.3.3
     version: 5.3.3
@@ -5732,6 +5738,24 @@ packages:
 
   /symbol-tree@3.2.4:
     resolution: {integrity: sha512-9QNk5KwDF+Bvz+PyObkmSYjI5ksVUYtjW7AU22r2NKcfLJcXp96hkDWU3+XndOsUb+AQ9QhfzfCT2O+CNWT5Tw==}
+    dev: true
+
+  /tailwindcss-base-font-size@1.0.1(tailwindcss@3.4.1):
+    resolution: {integrity: sha512-elrT3W0hM3l08cFl1p0g4hOLlXlSjXCCFeBfTMsWV+LRLOLZ0v7ILQPGg5q7hDGK45YB7E10UWkfyl0SazjWmg==}
+    peerDependencies:
+      tailwindcss: '>=3.3.2'
+    dependencies:
+      tailwindcss: 3.4.1
+    dev: true
+
+  /tailwindcss-scoped-preflight@2.1.0(postcss@8.4.33)(tailwindcss@3.4.1):
+    resolution: {integrity: sha512-f+3RZ3nnBh/FhFSoZ8mOC25/N+7bp7AW3odFPq/I2h8lOyBHRuj2z81ZjCZn7uiDsyXcjPX1dXOPOShI9qmSbQ==}
+    peerDependencies:
+      postcss: ^8
+      tailwindcss: ^3
+    dependencies:
+      postcss: 8.4.33
+      tailwindcss: 3.4.1
     dev: true
 
   /tailwindcss@3.4.1:

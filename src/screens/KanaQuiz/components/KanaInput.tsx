@@ -56,9 +56,9 @@ const KanaInput: Component<KanaInputProps> = (props) => {
   };
 
   return (
-    <label class="flex flex-row border-2 border-black rounded-md mx-auto">
+    <label class="flex flex-row border-2 border-solid border-black rounded-md mx-auto">
       <div
-        class="h-16 w-16 border-r-2 border-black flex items-center justify-center text-3xl"
+        class="h-16 w-16 border-r-2 border-solid border-black flex items-center justify-center text-3xl"
         classList={{
           'font-NotoSerif': theme.kanaFont === 'serif',
           'font-NotoSans': theme.kanaFont === 'sans',

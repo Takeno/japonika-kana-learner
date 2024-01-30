@@ -37,7 +37,7 @@ const Summary: Component<SummaryProps> = (props) => {
   };
 
   return (
-    <div class="w-full max-w-md mx-auto">
+    <div class="w-full max-w-md mx-auto text-base">
       <h2 class="text-3xl">Riepilogo</h2>
 
       <div class="grid grid-cols-2 mt-2 mb-4">
@@ -65,13 +65,13 @@ const Summary: Component<SummaryProps> = (props) => {
 
       <div class="flex flex-row gap-2 my-6">
         <button
-          class="border-2 px-4 py-2 rounded-xl uppercase"
+          class="border-2 border-solid px-4 py-2 rounded-xl uppercase"
           onClick={handleSharing}
         >
           Condividi
         </button>
         <button
-          class="border-2 px-4 py-2 rounded-xl uppercase"
+          class="border-2 border-solid px-4 py-2 rounded-xl uppercase"
           onClick={() => window.location.reload()}
         >
           Restart

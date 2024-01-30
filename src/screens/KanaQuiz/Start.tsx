@@ -100,7 +100,7 @@ const KanaQuizStart: Component<KanaQuizStartProps> = (props) => {
   return (
     <>
       <h2 class="text-2xl my-4">Benvenuto!</h2>
-      <p>
+      <p class="text-base">
         Seleziona i gruppi di caratteri che vuoi studiare, scegli le tipologie
         di esercizio disponibili e parti!
       </p>
@@ -184,7 +184,7 @@ const KanaQuizStart: Component<KanaQuizStartProps> = (props) => {
       </p>
 
       <div class="my-2 grid grid-cols-3 gap-2">
-        <label>
+        <label class="text-base">
           <input
             type="checkbox"
             checked={exerciseTypes.kana2romaji}
@@ -194,7 +194,7 @@ const KanaQuizStart: Component<KanaQuizStartProps> = (props) => {
           />{' '}
           Kana To Romaji
         </label>
-        <label>
+        <label class="text-base">
           <input
             type="checkbox"
             checked={exerciseTypes.romaji2kana}
@@ -204,7 +204,7 @@ const KanaQuizStart: Component<KanaQuizStartProps> = (props) => {
           />{' '}
           Romaji To Kana
         </label>
-        <label>
+        <label class="text-base">
           <input
             type="checkbox"
             checked={exerciseTypes['kana-free-text']}
@@ -218,7 +218,7 @@ const KanaQuizStart: Component<KanaQuizStartProps> = (props) => {
 
       <h3 class="text-center text-2xl">Font</h3>
       <div class="my-2 text-center">
-        <p class="italic mt-2">
+        <p class="italic mt-2 text-base">
           Scegli il font con le grazie (Noto Serif) o senza (Noto Sans).
         </p>
         <KanaFontSwitcher />
@@ -266,8 +266,8 @@ function KanaChooser(props: KanaChooserProps) {
   };
 
   return (
-    <fieldset class="my-4">
-      <label class="block text-center">
+    <fieldset class="my-4 border-none">
+      <label class="block text-center text-base">
         <input
           type="checkbox"
           checked={allSelected()}
@@ -279,7 +279,7 @@ function KanaChooser(props: KanaChooserProps) {
       <div class="grid grid-cols-2 gap-2">
         <For each={props.entries}>
           {([key, items]) => (
-            <label class="flex cursor-pointer space-x-3">
+            <label class="flex cursor-pointer space-x-3 text-base">
               <input
                 type="checkbox"
                 checked={props.selectedKanas.includes(key)}
