@@ -36,7 +36,8 @@ export function calculateKanaExercise(
   const correctAnswer = ALL_KANA[kana];
 
   const wrongAnswers = availableKanas
-    .filter((k) => k !== kana)
+    // Not this kana but also not the same romaji
+    .filter((k) => k !== kana && ALL_KANA[k] !== ALL_KANA[kana])
     .sort(() => 0.5 - Math.random())
     .slice(0, 3)
     .map((wrongKana) => ALL_KANA[wrongKana]);

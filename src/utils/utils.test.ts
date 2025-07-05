@@ -38,6 +38,29 @@ describe('calculateKanaExercise', () => {
 
     expect(result.answers.filter((el) => el === 'ku')).toHaveLength(1);
   });
+  test('should not return the same answer twice even if mixed katakana and hiragana', () => {
+    // Iterate 100 times to make sure the test is not flaky
+    for (let i = 0; i < 10; i++) {
+      const result = calculateKanaExercise('く', [
+        'か',
+        'き',
+        'く',
+        'け',
+        'こ',
+        'カ',
+        'キ',
+        'ク',
+        'ケ',
+        'コ',
+      ]);
+
+      expect(result.kana).toBe('く');
+      expect(result.answers).toBeInstanceOf(Array);
+      expect(result.answers).toHaveLength(4);
+
+      expect(result.answers.filter((el) => el === 'ku')).toHaveLength(1);
+    }
+  });
 
   test('should throw an error for unmatching kana', () => {
     expect(() =>
