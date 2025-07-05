@@ -1,4 +1,4 @@
-import {AllKana, ALL_KANA} from './kana';
+import {ALL_KANA, AllKana} from './kana';
 
 type Entries<T> = {[K in keyof T]: [K, T[K]]}[keyof T];
 
@@ -27,7 +27,7 @@ export type Exercise = {
 
 export function calculateKanaExercise(
   kana: AllKana,
-  availableKanas: AllKana[]
+  availableKanas: AllKana[],
 ): Exercise {
   if (availableKanas.includes(kana) === false) {
     throw new Error('Kana is not included in AvailableKanas');
@@ -67,7 +67,7 @@ export type RomajiExercise = {
 
 export function calculateRomajiExercise(
   kana: AllKana,
-  availableKanas: AllKana[]
+  availableKanas: AllKana[],
 ): RomajiExercise {
   if (availableKanas.includes(kana) === false) {
     throw new Error('Kana is not included in AvailableKanas');
@@ -99,7 +99,7 @@ export function calculateRomajiExercise(
 }
 
 export function calculateKanaErrors(
-  input: ExerciseResult<AllKana>[]
+  input: ExerciseResult<AllKana>[],
 ): {kana: AllKana; romaji: string; errors: number}[] {
   if (input.length === 0) {
     return [];
@@ -119,7 +119,7 @@ export function calculateKanaErrors(
           res.items
             .filter((item) => item.item === result.kana)
             .reduce((acc, item) => acc + item.failedAttempts, 0),
-        0
+        0,
       ),
     }));
 }

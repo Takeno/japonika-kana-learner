@@ -1,5 +1,5 @@
-import {describe, expect, test} from 'vitest';
 import {fireEvent, render} from '@solidjs/testing-library';
+import {describe, expect, test} from 'vitest';
 import KanaQuiz from '.';
 
 describe('<KanaQuiz />', () => {

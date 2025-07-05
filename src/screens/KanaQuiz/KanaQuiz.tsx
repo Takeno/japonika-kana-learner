@@ -5,8 +5,8 @@ import {
   JSX,
   Match,
   on,
-  splitProps,
   Switch,
+  splitProps,
 } from 'solid-js';
 import createKanaQuiz from '../../stores/createKanaQuiz';
 import {AllKana} from '../../utils/kana';
@@ -32,7 +32,7 @@ const KanaQuiz: Component = () => {
       window.scrollTo({
         top: 0,
       });
-    })
+    }),
   );
 
   return (
@@ -61,7 +61,7 @@ type DynamicComponentProps<T> = {
 } & T;
 
 function DynamicComponent<T extends {}>(
-  props: DynamicComponentProps<T>
+  props: DynamicComponentProps<T>,
 ): JSX.Element {
   const [local, rest] = splitProps(props, ['component']);
 

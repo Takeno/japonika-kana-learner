@@ -41,7 +41,7 @@ describe('calculateKanaExercise', () => {
 
   test('should throw an error for unmatching kana', () => {
     expect(() =>
-      calculateKanaExercise('く', ['あ', 'い', 'う', 'え', 'お'])
+      calculateKanaExercise('く', ['あ', 'い', 'う', 'え', 'お']),
     ).toThrowError();
   });
 });
@@ -82,7 +82,7 @@ describe('calculateRomajiExercise', () => {
 
   test('should throw an error for unmatching kana', () => {
     expect(() =>
-      calculateRomajiExercise('く', ['あ', 'い', 'う', 'え', 'お'])
+      calculateRomajiExercise('く', ['あ', 'い', 'う', 'え', 'お']),
     ).toThrowError();
   });
 });

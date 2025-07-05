@@ -1,9 +1,9 @@
 import {Component, For, onMount} from 'solid-js';
-import KanaInput from './components/KanaInput';
-import Timer from './components/Timer';
-import {AllKana, ALL_KANA} from '../../utils/kana';
 import createKanaExercise from '../../stores/createKanaExercise';
 import {trackEvent} from '../../utils/analytics';
+import {ALL_KANA, AllKana} from '../../utils/kana';
+import KanaInput from './components/KanaInput';
+import Timer from './components/Timer';
 
 type KanaFreeTextProps = KanaQuizExerciseProps<AllKana>;
 

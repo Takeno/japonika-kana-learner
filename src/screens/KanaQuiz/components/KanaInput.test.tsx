@@ -1,5 +1,5 @@
-import {vi, describe, expect, it} from 'vitest';
 import {fireEvent, render} from '@solidjs/testing-library';
+import {describe, expect, it, vi} from 'vitest';
 import KanaInput from './KanaInput';
 
 describe('<KanaInput>', () => {

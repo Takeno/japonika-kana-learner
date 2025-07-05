@@ -1,8 +1,8 @@
 import {Accessor, Component, For, onMount} from 'solid-js';
+import {trackEvent} from '../../utils/analytics';
 import {AllKana} from '../../utils/kana';
 import {formatTime} from '../../utils/utils';
 import KanaResultReport from './components/KanaResultReport';
-import {trackEvent} from '../../utils/analytics';
 
 type SummaryProps = {
   kanas: AllKana[];
@@ -85,10 +85,10 @@ export default Summary;
 
 function renderSharingText(
   kanas: AllKana[],
-  results: ExerciseResult<AllKana>[]
+  results: ExerciseResult<AllKana>[],
 ): string {
   const totalElapsedTime = formatTime(
-    results.reduce((acc, r) => acc + r.elapsedTime, 0)
+    results.reduce((acc, r) => acc + r.elapsedTime, 0),
   );
 
   const strikes = results.map((result) => {

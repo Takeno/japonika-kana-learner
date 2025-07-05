@@ -1,11 +1,10 @@
 import {Component, For, onMount} from 'solid-js';
-import type {AllKana} from '../../utils/kana';
-
-import KanaGuesser from './components/KanaGuesser';
-import {calculateKanaExercise} from '../../utils/utils';
-import Timer from './components/Timer';
 import createKanaExercise from '../../stores/createKanaExercise';
 import {trackEvent} from '../../utils/analytics';
+import type {AllKana} from '../../utils/kana';
+import {calculateKanaExercise} from '../../utils/utils';
+import KanaGuesser from './components/KanaGuesser';
+import Timer from './components/Timer';
 
 type KanaToRomajiProps = KanaQuizExerciseProps<AllKana>;
 

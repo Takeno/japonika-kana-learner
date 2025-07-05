@@ -1,4 +1,4 @@
-import {createContext, useContext, ParentComponent} from 'solid-js';
+import {createContext, ParentComponent, useContext} from 'solid-js';
 import {createStore} from 'solid-js/store';
 import {z} from 'zod';
 
@@ -12,7 +12,7 @@ type ThemeContextValue = [
   state: Readonly<ThemeContextState>,
   actions: {
     changeKanaFont: (font: KanaFont) => void;
-  }
+  },
 ];
 
 const ThemeContext = createContext<ThemeContextValue>([
@@ -28,6 +28,7 @@ export const ThemeProvider: ParentComponent<{}> = (props) => {
   const [state, setState] = createStore<ThemeContextState>(getPersistedState());
 
   const changeKanaFont = (font: KanaFont) => {
+    console.log('a', font);
     setState('kanaFont', font);
     savePersistedState(state);
   };
@@ -50,7 +51,7 @@ function getPersistedState(): ThemeContextState {
 
   try {
     return themeSchema.parse(JSON.parse(persistedState));
-  } catch (e) {
+  } catch (_e) {
     return themeSchema.parse({});
   }
 }

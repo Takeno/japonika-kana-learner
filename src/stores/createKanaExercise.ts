@@ -1,7 +1,6 @@
 import type {Accessor} from 'solid-js';
-import type {AllKana} from '../utils/kana';
-
 import {createStore} from 'solid-js/store';
+import type {AllKana} from '../utils/kana';
 
 type KanaExerciseInput<T> = {
   kanas: Set<T>;
@@ -16,7 +15,7 @@ type KanaExercise<T> = {
 };
 
 export default function createKanaExercise<T = AllKana>(
-  input: KanaExerciseInput<T>
+  input: KanaExerciseInput<T>,
 ): KanaExercise<T> {
   const startDate = new Date();
 
@@ -27,7 +26,7 @@ export default function createKanaExercise<T = AllKana>(
       item: kana,
       completed: false,
       failedAttempts: 0,
-    }))
+    })),
   );
 
   const allCompleted = () => results.every((r) => r.completed);
@@ -50,13 +49,13 @@ export default function createKanaExercise<T = AllKana>(
       elapsedTime: Math.round((Date.now() - startDate.getTime()) / 1000),
       failedAttempts: results.reduce(
         (acc, r) => acc + r.failedAttempts + (r.completed ? 0 : 1),
-        0
+        0,
       ),
       successStrikePercentage: Math.round(
         100 *
           (results.filter((r) => r.completed === true && r.failedAttempts === 0)
             .length /
-            results.length)
+            results.length),
       ),
     };
   };

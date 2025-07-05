@@ -9,5 +9,5 @@ render(
       <KanaQuiz />
     </ThemeProvider>
   ),
-  document.getElementById('kana-quiz-container') as HTMLElement
+  document.getElementById('kana-quiz-container') as HTMLElement,
 );

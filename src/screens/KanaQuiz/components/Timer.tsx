@@ -11,7 +11,7 @@ const Timer: Component<TimerProps> = (props) => {
   const intervalId = setInterval(
     () =>
       setSeconds(Math.round((Date.now() - props.startDate.getTime()) / 1000)),
-    500
+    500,
   );
 
   onCleanup(() => clearInterval(intervalId));

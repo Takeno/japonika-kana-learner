@@ -46,8 +46,8 @@ const KanaGuesser: Component<KanaGuesserProps> = (props) => {
                 error() === index()
                   ? 'error'
                   : success() === index()
-                  ? 'success'
-                  : undefined
+                    ? 'success'
+                    : undefined
               }
             >
               {item}

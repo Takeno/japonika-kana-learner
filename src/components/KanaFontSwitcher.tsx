@@ -7,6 +7,7 @@ const KanaFontSwitcher: Component = function () {
   const handleChange: JSX.EventHandlerUnion<HTMLSelectElement, Event> = (e) => {
     const el = e.currentTarget;
 
+    console.log(el.value, actions);
     if (el.value === 'serif' || el.value === 'sans') {
       actions.changeKanaFont(el.value);
     }

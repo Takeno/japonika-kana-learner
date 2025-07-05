@@ -2,6 +2,7 @@ import {Component, createSignal, For, onMount} from 'solid-js';
 import {createStore} from 'solid-js/store';
 import KanaFontSwitcher from '../../components/KanaFontSwitcher';
 import {useTheme} from '../../contexts/ThemeContext';
+import {trackEvent} from '../../utils/analytics';
 import {
   ALL_KANA,
   AllKana,
@@ -9,12 +10,11 @@ import {
   KATAKANA_GROUPS,
 } from '../../utils/kana';
 import {ObjectEntries} from '../../utils/utils';
-import {trackEvent} from '../../utils/analytics';
 
 type KanaQuizStartProps = {
   onStart: (
     kanas: AllKana[],
-    config: {exerciseTypes: KanaQuizExerciseType[]}
+    config: {exerciseTypes: KanaQuizExerciseType[]},
   ) => void;
 };
 
@@ -35,7 +35,7 @@ const KanaQuizStart: Component<KanaQuizStartProps> = (props) => {
 
   const allHiraganaSelected = () =>
     ObjectEntries(HIRAGANA_GROUPS).every(([key]) =>
-      selectedKanas().includes(key)
+      selectedKanas().includes(key),
     );
 
   function toggleAllHiragana() {
@@ -43,14 +43,14 @@ const KanaQuizStart: Component<KanaQuizStartProps> = (props) => {
       setSelectedKanas((old) => old.filter((k) => !(k in HIRAGANA_GROUPS)));
     } else {
       ObjectEntries(HIRAGANA_GROUPS).forEach(([key]) =>
-        setSelectedKanas((old) => (old.includes(key) ? old : old.concat(key)))
+        setSelectedKanas((old) => (old.includes(key) ? old : old.concat(key))),
       );
     }
   }
 
   const allKatakanaSelected = () =>
     ObjectEntries(KATAKANA_GROUPS).every(([key]) =>
-      selectedKanas().includes(key)
+      selectedKanas().includes(key),
     );
 
   function toggleAllKatakana() {
@@ -58,7 +58,7 @@ const KanaQuizStart: Component<KanaQuizStartProps> = (props) => {
       setSelectedKanas((old) => old.filter((k) => !(k in KATAKANA_GROUPS)));
     } else {
       ObjectEntries(KATAKANA_GROUPS).forEach(([key]) =>
-        setSelectedKanas((old) => (old.includes(key) ? old : old.concat(key)))
+        setSelectedKanas((old) => (old.includes(key) ? old : old.concat(key))),
       );
     }
   }

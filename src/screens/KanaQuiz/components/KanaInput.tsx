@@ -36,7 +36,7 @@ const KanaInput: Component<KanaInputProps> = (props) => {
   };
 
   const handleChange: JSX.EventHandlerUnion<HTMLInputElement, KeyboardEvent> = (
-    e
+    e,
   ) => {
     if (e.key !== 'Enter') {
       return;
@@ -48,7 +48,7 @@ const KanaInput: Component<KanaInputProps> = (props) => {
   };
 
   const handleBlur: JSX.EventHandlerUnion<HTMLInputElement, FocusEvent> = (
-    e
+    e,
   ) => {
     const el = e.currentTarget;
 

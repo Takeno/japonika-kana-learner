@@ -22,6 +22,6 @@ module.exports = {
       ? require('tailwindcss-base-font-size')({
           baseFontSize: process.env.REM_SIZE,
         })
-      : []
+      : [],
   ),
 };
