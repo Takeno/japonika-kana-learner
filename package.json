@@ -10,25 +10,20 @@
     "build:kana-quiz": "REM_SIZE=13 vite build --mode kana-quiz && mv ./dist/kana-quiz.umd.cjs ./dist/kana-quiz.umd.js",
     "serve": "vite preview",
     "test": "vitest run",
-    "lint:fix": "eslint --fix",
-    "lint:ci": "eslint --quiet ./src",
+    "lint:fix": "biome check --write",
+    "lint:ci": "biome check",
     "coverage": "vitest --coverage",
     "prepare": "husky install"
   },
   "license": "MIT",
   "devDependencies": {
-    "@improntaadvance/eslint-config": "^0.11.0",
+    "@biomejs/biome": "2.0.6",
     "@solidjs/testing-library": "^0.8.5",
     "@testing-library/jest-dom": "^6.3.0",
     "@types/gtag.js": "^0.0.18",
     "@types/node": "^20.11.8",
-    "@typescript-eslint/eslint-plugin": "^6.19.1",
-    "@typescript-eslint/parser": "^6.19.1",
     "@vitest/coverage-v8": "^1.2.2",
     "autoprefixer": "^10.4.17",
-    "eslint": "^8.56.0",
-    "eslint-config-react-app": "7.0.1",
-    "eslint-plugin-solid": "^0.13.1",
     "husky": "^9.0.6",
     "jsdom": "^24.0.0",
     "lint-staged": "^15.2.0",
@@ -47,6 +42,6 @@
     "zod": "^3.22.4"
   },
   "lint-staged": {
-    "*.{ts,tsx,js,jsx}": "eslint --fix"
+    "*.{ts,tsx,js,jsx}": "biome check --write"
   }
 }
